@@ -1,22 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './Pages/Home';
+import About from './Pages/About';
+import Navigation from './Pages/Navigation';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          <BrowserRouter>
+          <div>
+            <Navigation />
+              <Switch>
+              <Route path="/" component={Home} exact/>
+              <Route path="/about" component={About}/>
+            </Switch>
+          </div> 
+        </BrowserRouter>
       </header>
     </div>
   );

@@ -1,0 +1,7 @@
+#HomeCharts{
+    display: flex;
+    flex-direction: row;
+}
+.Chart{
+    margin: 10px;
+}
