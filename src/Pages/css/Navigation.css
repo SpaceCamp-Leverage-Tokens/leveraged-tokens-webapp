@@ -1,8 +1,17 @@
 #NavBar{
-    margin-bottom: 1%;
+    /* margin-bottom: 1%; */
     display: flex;
+    flex:1;
+    align-content: flex-end;
     justify-content: flex-end;
 }
-#title{
-    margin-right: 10%;
+#TopBar{
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+
+}
+#Title{
+    flex: 1;
+    justify-content: flex-start;
 }

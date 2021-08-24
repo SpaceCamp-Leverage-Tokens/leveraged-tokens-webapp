@@ -36,9 +36,8 @@ const Home = ( ) => {
           </Container>
           
           <ActivePools>
-            
+
           </ActivePools>
-          
           
       </div>
     );

@@ -1,10 +1,14 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
+import './css/ActivePools.css'
 
 const ActivePools = () => {
+    const history = useHistory();
+
     return (
-        <div class="ui card">
+        <div class="ui card fluid">
             <div class="content">
-            <h2 class="ui header">Most Active Pools</h2>
+            <h3 class="ui header">Most Active Pools</h3>
                 <table class="ui selectable inverted table">
                 <thead>
                     <tr>
@@ -15,7 +19,7 @@ const ActivePools = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr onClick={() => { history.push('/leveragedAsset') }}>
                     <td>MIR</td>
                     <td>3x</td>
                     <td>30k</td>
