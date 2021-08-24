@@ -1,9 +1,25 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import './css/ActivePools.css'
+import LeveragedPoolRow from './LeveragedPoolRow';
 
 const ActivePools = () => {
     const history = useHistory();
+
+    // TODO: Rank according to highest volume
+    const Data = [
+        {assetName:"LUNA",poolLeverage:3,volume:"40,123 UST",tlv:"221k"},
+        {assetName:"MIR",poolLeverage:3,volume:"10,123 UST",tlv:"120k"},
+        {assetName:"mTSLA",poolLeverage:2,volume:"1,323 UST",tlv:"20k"},
+        {assetName:"mAPPL",poolLeverage:3,volume:"466 UST",tlv:"30k"},
+
+    ]
+
+    const renderLeveragedPoolRow = (leveragedPool) => {
+        return(
+        <LeveragedPoolRow leveragedPool={leveragedPool}/>
+        )
+    }
 
     return (
         <div class="ui card fluid">
@@ -19,24 +35,7 @@ const ActivePools = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onClick={() => { history.push('/leveragedAsset') }}>
-                    <td>MIR</td>
-                    <td>3x</td>
-                    <td>30k</td>
-                    <td class="right aligned">130,023 UST</td>
-                    </tr>
-                    <tr>
-                    <td>mTSLA</td>
-                    <td>2x</td>
-                    <td>13k</td>
-                    <td class="right aligned">31,235 UST</td>
-                    </tr>
-                    <tr>
-                    <td>mAPPL</td>
-                    <td>3x</td>
-                    <td>40k</td>
-                    <td class="right aligned">200,123 UST</td>
-                    </tr>
+                    {Object.values(Data).map(renderLeveragedPoolRow)}
                 </tbody>
                 </table>
             </div>
