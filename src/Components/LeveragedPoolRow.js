@@ -13,6 +13,8 @@ const LeveragedPoolRow = ({leveragedPool}) => {
         <td>{leveragedPool.assetName}</td>
         <td>{leveragedPool.poolLeverage}x</td>
         <td>{leveragedPool.volume}</td>
+        <td>{leveragedPool.pr}</td>
+        <td>{leveragedPool.mpr}</td>
         <td class="right aligned">{leveragedPool.tlv}</td>
         </tr>
     );

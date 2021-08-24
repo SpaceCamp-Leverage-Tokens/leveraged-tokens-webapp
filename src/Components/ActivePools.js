@@ -8,11 +8,10 @@ const ActivePools = () => {
 
     // TODO: Rank according to highest volume
     const Data = [
-        {assetName:"LUNA",poolLeverage:3,volume:"40,123 UST",tlv:"221k"},
-        {assetName:"MIR",poolLeverage:3,volume:"10,123 UST",tlv:"120k"},
-        {assetName:"mTSLA",poolLeverage:2,volume:"1,323 UST",tlv:"20k"},
-        {assetName:"mAPPL",poolLeverage:3,volume:"466 UST",tlv:"30k"},
-
+        {assetName:"LUNA",poolLeverage:3,volume:"40,123 UST",tlv:"221k",pr:4,mpr:3},
+        {assetName:"MIR",poolLeverage:3,volume:"10,123 UST",tlv:"120k",pr:3.5,mpr:3},
+        {assetName:"mTSLA",poolLeverage:2,volume:"1,323 UST",tlv:"20k",pr:6,mpr:3},
+        {assetName:"mAPPL",poolLeverage:3,volume:"466 UST",tlv:"30k",pr:3.4,mpr:2.5},
     ]
 
     const renderLeveragedPoolRow = (leveragedPool) => {
@@ -25,12 +24,14 @@ const ActivePools = () => {
         <div class="ui card fluid">
             <div class="content">
             <h3 class="ui header">Most Active Pools</h3>
-                <table class="ui selectable inverted table">
+                <table class="ui selectable inverted table small">
                 <thead>
                     <tr>
                     <th>Asset</th>
                     <th>Leverage</th>
                     <th>Volume</th>
+                    <th>Protocol Ratio</th>
+                    <th>Min Protocol Ratio</th>
                     <th class="right aligned">TLV</th>
                     </tr>
                 </thead>
