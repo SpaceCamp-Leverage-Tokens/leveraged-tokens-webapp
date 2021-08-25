@@ -8,10 +8,10 @@ const ActivePools = () => {
 
     // TODO: Rank according to highest volume
     const Data = [
-        {assetName:"LUNA",poolLeverage:3,volume:"40,123 UST",tlv:"221k",pr:4,mpr:3},
-        {assetName:"MIR",poolLeverage:3,volume:"10,123 UST",tlv:"120k",pr:3.5,mpr:3},
-        {assetName:"mTSLA",poolLeverage:2,volume:"1,323 UST",tlv:"20k",pr:6,mpr:3},
-        {assetName:"mAPPL",poolLeverage:3,volume:"466 UST",tlv:"30k",pr:3.4,mpr:2.5},
+        {assetName:"LUNA",poolLeverage:3,volume:"40,123 UST",tlv:"221k",pr:4,mpr:3,rbr:3.5,tmv:"50k"},
+        {assetName:"MIR",poolLeverage:3,volume:"10,123 UST",tlv:"120k",pr:3.5,mpr:3,rbr:3.2,tmv:"3k"},
+        {assetName:"mTSLA",poolLeverage:2,volume:"1,323 UST",tlv:"20k",pr:6,mpr:3,rbr:3.5,tmv:"129"},
+        {assetName:"mAPPL",poolLeverage:3,volume:"466 UST",tlv:"30k",pr:3.4,mpr:2.5,rbr:3,tmv:"120k"},
     ]
 
     const renderLeveragedPoolRow = (leveragedPool) => {

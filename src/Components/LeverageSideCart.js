@@ -16,11 +16,11 @@ const LeverageSideCart = ({props}) => {
                         </a>
                         <a class="item">
                             Total Minted Value (UST)
-                            <div class="ui label">51</div>
+                            <div class="ui label">{props.tmv}</div>
                         </a>
                         <a class="item">
                             Leverage Amount
-                            <div class="ui label">{props.poolLeverage}</div>
+                            <div class="ui label">{props.poolLeverage}X</div>
                         </a>
                         <a class="item">
                             Volume (24 Hrs)
@@ -32,7 +32,7 @@ const LeverageSideCart = ({props}) => {
                         </a> 
                         <a class="item">
                             Rebalance Ratio
-                            <div class="ui label">1</div>
+                            <div class="ui label">{props.rbr}</div>
                         </a>    
                         <a class="item">
                             Min Protocol Ratio
