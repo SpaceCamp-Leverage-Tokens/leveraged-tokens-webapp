@@ -37,6 +37,10 @@ const LeverageSideCart = ({props}) => {
                         <a className="item">
                             Min Protocol Ratio
                             <div className="ui label">{props.mpr}</div>
+                        </a>  
+                        <a className="item">
+                            Leverage Mint Fee
+                            <div className="ui label">0.{props.mpr}%</div>
                         </a>                   
                         </div>  
                     </div>

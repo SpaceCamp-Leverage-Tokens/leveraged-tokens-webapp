@@ -34,7 +34,7 @@ const LiquidityCard = ( {props} ) => {
                 <Form className="ui form">
                     <div className="field">
                         <label>Amount</label>
-                        <Input type="text" 
+                        <Input type="number" 
                         name="first-name"
                         placeholder="1" 
                         />
@@ -46,14 +46,14 @@ const LiquidityCard = ( {props} ) => {
                 <Form className="ui form">
                     <div className="field">
                         <label>Amount</label>
-                        <Input type="text" 
+                        <Input type="number" 
                         name="first-name" 
                         placeholder="1"
                         type='number'
                         value={removeAmount}
                         onChange={handleRemoveChange}/>
                     </div>
-                    <Button className="ui basic red button" onClick={handleMaxClick}>Max Withdrawable</Button>
+                    <Button className="ui basic red button" onClick={handleMaxClick}>Max</Button>
                     <Button className="ui basic red button">Remove Liquidity</Button>
 
                 </Form>
