@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HomeChartCard from '../Components/HomeChartCard';
-import logo from './../logo.svg';
 import {Container} from 'semantic-ui-react';
 import "./css/Home.css"
 import ActivePools from '../Components/ActivePools';

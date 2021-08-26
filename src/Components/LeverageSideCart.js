@@ -6,37 +6,37 @@ const LeverageSideCart = ({props}) => {
     
     return (
         <Container>
-            <div class="ui card fluid"> 
-                <div class="content">
-                    <h2 class="ui header">Pool Information</h2>
-                    <div class="ui vertical menu fluid">
-                        <a class="teal item active">
+            <div className="ui card fluid"> 
+                <div className="content">
+                    <h2 className="ui header">Pool Information</h2>
+                    <div className="ui vertical menu fluid">
+                        <a className="teal item active">
                             Total Value Locked (UST)
-                            <div class="ui teal label">{props.tlv}</div>
+                            <div className="ui teal label">{props.tlv}</div>
                         </a>
-                        <a class="item">
+                        <a className="item">
                             Total Minted Value (UST)
-                            <div class="ui label">{props.tmv}</div>
+                            <div className="ui label">{props.tmv}</div>
                         </a>
-                        <a class="item">
+                        <a className="item">
                             Leverage Amount
-                            <div class="ui label">{props.poolLeverage}X</div>
+                            <div className="ui label">{props.poolLeverage}X</div>
                         </a>
-                        <a class="item">
+                        <a className="item">
                             Volume (24 Hrs)
-                            <div class="ui label">{props.volume}</div>
+                            <div className="ui label">{props.volume}</div>
                         </a>    
-                        <a class="item">
+                        <a className="item">
                             Protocol Ratio
-                            <div class="ui label">{props.pr}</div>
+                            <div className="ui label">{props.pr}</div>
                         </a> 
-                        <a class="item">
+                        <a className="item">
                             Rebalance Ratio
-                            <div class="ui label">{props.rbr}</div>
+                            <div className="ui label">{props.rbr}</div>
                         </a>    
-                        <a class="item">
+                        <a className="item">
                             Min Protocol Ratio
-                            <div class="ui label">{props.mpr}</div>
+                            <div className="ui label">{props.mpr}</div>
                         </a>                   
                         </div>  
                     </div>

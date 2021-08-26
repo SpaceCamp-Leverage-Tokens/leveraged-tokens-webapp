@@ -4,6 +4,7 @@ import LeverageChart from '../Components/LeverageChart';
 import {Container} from 'semantic-ui-react';
 import LeverageSideCart from '../Components/LeverageSideCart';
 import './css/LeveragedPool.css'
+import LeveragedActions from '../Components/LeveragedActions';
 
 const LeveragedPool = ({ props }) => { 
     const location = useLocation();
@@ -16,38 +17,8 @@ const LeveragedPool = ({ props }) => {
                 <LeverageSideCart id='Side-Cart' props={location.state}/>
            </Container>
            
-           <div class="ui card fluid">
-                <div class="content">
-                    <div class="ui cards">
-                        <div class="ui card fluid">
-                            <div class="content">
-                            <div class="header">
-                                Liquidity Provider / Hedged Position
-                            </div>
-                            </div>
-                            <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui basic green button">Add Liquidity</div>
-                                <div class="ui basic red button">Remove Liquidity</div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="ui card fluid">
-                            <div class="content">
-                            <div class="header">
-                                Leveraged Position
-                            </div>
-                            </div>
-                            <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui basic green button">Take Leverage</div>
-                                <div class="ui basic red button">Close Leverage</div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                </div>
-            </div>
+           <LeveragedActions props={location.state}/>
+           
        </div>
     );
 }
