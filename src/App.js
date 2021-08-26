@@ -10,7 +10,7 @@ import MyPortfolio from './Pages/MyPortfolio';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div>
           <BrowserRouter>
           <div>
             <Navigation />
@@ -19,11 +19,10 @@ function App() {
               <Route path="/about" component={About}/>
               <Route path="/MyPortfolio" component={MyPortfolio}/>
               <Route path="/leveragedAsset" component={LeveragedPool}/>
-
             </Switch>
           </div> 
         </BrowserRouter>
-      </header>
+      </div>
     </div>
   );
 }

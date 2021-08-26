@@ -2,6 +2,7 @@ import React from 'react';
 import LeveragedActions from '../Components/LeveragedActions';
 import { Container } from '@material-ui/core';
 import "./css/MyPortfolio.css"
+import TotalValueCard from '../Components/TotalValueCard';
 
 const MyPortfolio = () => {
 
@@ -17,6 +18,8 @@ const MyPortfolio = () => {
 
     return (
        <div id="Portfolio-Container">
+           <TotalValueCard props={Data}/>
+
            {Object.values(Data).map(getLeverageActionCards)}
        </div>
     );

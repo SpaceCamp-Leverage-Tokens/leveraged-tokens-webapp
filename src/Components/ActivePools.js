@@ -20,7 +20,7 @@ const ActivePools = () => {
         <div className="ui card fluid">
             <div className="content">
             <h3 className="ui header">Most Active Pools</h3>
-                <table className="ui selectable inverted table small">
+                <table className="ui selectable inverted large table">
                 <thead>
                     <tr>
                     <th>Asset</th>
