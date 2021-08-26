@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import { Container } from '@material-ui/core';
 import './css/LiquidityCard.css'
-import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
+import { Button, Form, Input } from 'semantic-ui-react'
 
 const LiquidityCard = ( {props} ) => {
     
-    const [removeAmount, setRemoveAmount] = useState(10)
+    const [removeAmount, setRemoveAmount] = useState(0)
     const dummyPosition = 100000
-
-    console.log(props)
 
     function getMaxWithdrawable(){
         return Math.min(props.tlv - props.rbr*props.tmv,dummyPosition )
@@ -20,9 +18,6 @@ const LiquidityCard = ( {props} ) => {
     function handleMaxClick(){
         setRemoveAmount(getMaxWithdrawable())
     }
-
-
-    console.log(props)
 
     return (
         <Container className='Liquidity-Card'>
@@ -36,9 +31,10 @@ const LiquidityCard = ( {props} ) => {
                         <label>Amount</label>
                         <Input type="number" 
                         name="first-name"
-                        placeholder="1" 
+                        placeholder="0" 
                         />
                     </div>
+                    <Button className="ui basic green button">Max</Button>
                     <Button className="ui basic green button">Add Liquidity</Button>
                 </Form>
             </Container>
@@ -48,7 +44,7 @@ const LiquidityCard = ( {props} ) => {
                         <label>Amount</label>
                         <Input type="number" 
                         name="first-name" 
-                        placeholder="1"
+                        placeholder="0"
                         type='number'
                         value={removeAmount}
                         onChange={handleRemoveChange}/>

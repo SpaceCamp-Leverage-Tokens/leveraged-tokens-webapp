@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { VictoryChart, VictoryLegend, VictoryAxis, VictoryScatter, VictoryTooltip, VictoryLine} from "victory";
+import { VictoryChart, VictoryLine} from "victory";
 
 const useStyles = makeStyles({
     root: {

@@ -5,6 +5,7 @@ import Navigation from './Pages/Navigation';
 import LeveragedPool from './Pages/LeveragedPool'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css'
+import MyPortfolio from './Pages/MyPortfolio';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Switch>
               <Route path="/" component={Home} exact/>
               <Route path="/about" component={About}/>
+              <Route path="/MyPortfolio" component={MyPortfolio}/>
               <Route path="/leveragedAsset" component={LeveragedPool}/>
 
             </Switch>

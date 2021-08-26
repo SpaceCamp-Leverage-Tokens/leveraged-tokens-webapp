@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryChart, VictoryLegend, VictoryAxis, VictoryScatter, VictoryTooltip, VictoryLine} from "victory";
+import { VictoryChart, VictoryLegend, VictoryLine} from "victory";
 import { Container } from '@material-ui/core';
 
 const LeverageChart = ({props}) => {

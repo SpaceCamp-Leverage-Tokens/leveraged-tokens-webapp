@@ -1,6 +1,5 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
-import { VictoryChart, VictoryLegend, VictoryAxis, VictoryScatter, VictoryTooltip, VictoryLine} from "victory";
 
 const LeverageSideCart = ({props}) => {
     

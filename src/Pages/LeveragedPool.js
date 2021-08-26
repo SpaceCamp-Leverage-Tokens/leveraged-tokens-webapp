@@ -11,7 +11,7 @@ const LeveragedPool = ({ props }) => {
     console.log(location)
 
     return (
-       <div id='Leveraged Pool'>
+       <div id='Leveraged-Pool'>
            <Container id='Pool-Information'>
                 <LeverageChart id='Lev-Chart' props={location.state}/>
                 <LeverageSideCart id='Side-Cart' props={location.state}/>

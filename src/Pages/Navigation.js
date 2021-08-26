@@ -13,7 +13,7 @@ const Navigation = () => {
                                 Dashboard
                         </Button> 
                     </NavLink>
-                    <NavLink to="/about">
+                    <NavLink to="/MyPortfolio">
                         <Button type="button">
                                 My Portfolio
                         </Button> 
