@@ -5,7 +5,7 @@ const LeverageSideCart = ({props}) => {
     
     return (
         <Container>
-            <div className="ui card fluid"> 
+            <Container className="ui card fluid"> 
                 <div className="content">
                     <h2 className="ui header">Pool Information</h2>
                     <div className="ui vertical menu fluid">
@@ -43,7 +43,7 @@ const LeverageSideCart = ({props}) => {
                         </a>                   
                         </div>  
                     </div>
-                </div>
+                </Container>
         </Container>
         
     );

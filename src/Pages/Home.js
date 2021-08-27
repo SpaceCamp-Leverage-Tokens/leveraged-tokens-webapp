@@ -28,14 +28,16 @@ const Home = ( ) => {
     ]
     return (
         <div className="App">
-          <Container id="HomeCharts">
-            <HomeChartCard className="Chart" Title={"Total Value Locked"} Data={DummyTlv} />
-            <HomeChartCard className="Chart" Title={"Trade Volume"} Data={DummyVol}/>
-            <HomeChartCard className="Chart" Title={"Governance Token Price"} Data={DummyGov}/>
+          <Container>
+            <Container id="HomeCharts">
+              <HomeChartCard className="Chart" Title={"Total Value Locked"} Data={DummyTlv} />
+              <HomeChartCard className="Chart" Title={"Trade Volume"} Data={DummyVol}/>
+              <HomeChartCard className="Chart" Title={"Governance Token Price"} Data={DummyGov}/>
+            </Container>
+            
+            <ActivePools/>
           </Container>
           
-          <ActivePools>
-          </ActivePools>
           
       </div>
     );

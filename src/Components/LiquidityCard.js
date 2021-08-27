@@ -23,7 +23,7 @@ const LiquidityCard = ( {props} ) => {
         <Container className='Liquidity-Card'>
             <Container>
                 <h3 className='ui header'>Liquidity Position</h3>
-                <h3 className='ui header'>Current Position: {dummyPosition} {props.assetName}</h3>
+                <h4 className='ui header'>Current Position: {dummyPosition} {props.assetName}</h4>
             </Container>
             <Container>
                 <Form className="ui form">

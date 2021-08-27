@@ -11,15 +11,14 @@ const LeveragedPool = ({ props }) => {
     console.log(location)
 
     return (
-       <div id='Leveraged-Pool'>
+       <Container id='Leveraged-Pool'>
            <Container id='Pool-Information'>
                 <LeverageChart id='Lev-Chart' props={location.state}/>
                 <LeverageSideCart id='Side-Cart' props={location.state}/>
            </Container>
            
-           <LeveragedActions props={location.state}/>
-           
-       </div>
+           <LeveragedActions props={location.state}/>      
+       </Container>
     );
 }
  

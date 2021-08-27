@@ -2,3 +2,8 @@
 .hr.solid {
     border-top: 3px solid rgb(0, 0, 0);
   }
+
+.Pool-Name{
+    margin-left: 15px;
+    padding-top: 10px;
+}

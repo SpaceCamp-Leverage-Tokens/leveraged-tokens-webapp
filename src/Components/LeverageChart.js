@@ -19,8 +19,7 @@ const LeverageChart = ({props}) => {
         { x: 5, y: 9 }
       ]
     return (
-        <Container>
-        <div className="ui card fluid">
+        <Container className="ui card fluid">
             <div className="content">
                 <h2 className="ui header">{props.assetName}-{props.poolLeverage}x Pool</h2>
                 <VictoryChart>
@@ -43,7 +42,6 @@ const LeverageChart = ({props}) => {
             />
               </VictoryChart>
             </div>
-        </div>
         </Container>
     );
 }

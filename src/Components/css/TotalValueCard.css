@@ -2,3 +2,6 @@
     display: flex;
     flex-direction: row;
 }
+#Portfolio-Text{
+    margin:100px;
+}

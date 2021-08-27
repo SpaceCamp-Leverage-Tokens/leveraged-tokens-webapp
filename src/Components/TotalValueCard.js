@@ -16,7 +16,7 @@ const TotalValueCard = ({props}) => {
         <div className="ui card fluid">
             <div className="content">
                     <Container className="Panels" style={{display:"flex"}}>
-                        <Container>
+                        <Container className="Portfolio-Text">
                             <div className="ui list">
                                 <h2 className="ui header">Total Value: {"1000 UST"}</h2>
                                 {Object.values(props).map(renderListItem)}
@@ -25,9 +25,10 @@ const TotalValueCard = ({props}) => {
                         <Container>
                             <VictoryPie
                             colorScale="qualitative"
-                            width={300} height={200}
+                            width={300} height={180}
                             startAngle={90}
                             endAngle={450}
+                            innerRadius={50}
                             data={[
                                 { x: 1, y: 2, label: "Luna" },
                                 { x: 2, y: 3, label: "mTSLA" },
