@@ -8,6 +8,7 @@ import 'semantic-ui-css/semantic.min.css'
 import MyPortfolio from './Pages/MyPortfolio';
 
 function App() {
+
   return (
     <div className="App">
       <div>

@@ -3,6 +3,8 @@ import HomeChartCard from '../Components/HomeChartCard';
 import {Container} from 'semantic-ui-react';
 import "./css/Home.css"
 import ActivePools from '../Components/ActivePools';
+import { LCDClient, Coin } from '@terra-money/terra.js';
+import { mockAllContractsIds } from '../Helpers/QueryHelper';
 
 const Home = ( ) => {
     const DummyTlv=[
@@ -26,6 +28,28 @@ const Home = ( ) => {
       { x: 4, y: 4 },
       { x: 5, y: 4.2 }
     ]
+
+      
+  // const terra = new LCDClient({
+  //   URL: 'https://tequila-lcd.terra.dev',
+  //   chainID: 'tequila-0004',
+  // });
+  
+  // To use LocalTerra
+
+  const terra = new LCDClient({
+    URL: 'http://localhost:1317',
+    chainID: 'localterra'
+  });
+
+  // TODO:  
+  // factoryAddr = someTerraAddress
+
+  // allContractsJSON = terra.wasm.contractQuery(factoryAddr....)
+
+  // const mockAllContractsIds = ["terra1mdsrlfcsttduvcs35dhc8cm99c4v752he3s86w"]
+  const props = {contractIds: mockAllContractsIds, terra:terra}
+
     return (
         <div className="App">
           <Container>
@@ -35,7 +59,8 @@ const Home = ( ) => {
               <HomeChartCard className="Chart" Title={"Governance Token Price"} Data={DummyGov}/>
             </Container>
             
-            <ActivePools/>
+            <ActivePools props={props}/>
+
           </Container>
           
           

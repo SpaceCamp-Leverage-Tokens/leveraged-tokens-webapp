@@ -17,7 +17,7 @@ const LeveragedActions = ( {props} ) => {
                 pathname:'/leveragedAsset',
                 state: props
                 }) }} > 
-                <h3>{props.assetName}-{props.poolLeverage}x Pool </h3>               
+                <h3>{props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x Pool</h3>               
                 </Button>
                 
             <div className="content">

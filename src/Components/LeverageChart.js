@@ -21,7 +21,7 @@ const LeverageChart = ({props}) => {
     return (
         <Container className="ui card fluid">
             <div className="content">
-                <h2 className="ui header">{props.assetName}-{props.poolLeverage}x Pool</h2>
+                <h2 className="ui header">{props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x Pool</h2>
                 <VictoryChart>
                 <VictoryLine style={{
                   data: { stroke: "#c43a31" },

@@ -1,21 +1,42 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+import { getPoolData } from '../Helpers/QueryHelper';
 
-const LeveragedPoolRow = ({leveragedPool}) => {
+const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
     
     const history = useHistory();
+    const [props, setProps] = useState({assetInfo:{},
+        leveragedPoolId:{},
+        leveragedPoolInfo:{}})
+
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect( ()=> {
+        getPoolQuery().then(setLoading(false));
+    }, []);
+
+    async function getPoolQuery(){
+        const tempPoolData = await getPoolData(leveragedPoolId,terra)
+        setProps(tempPoolData)
+    }
+
+    if (isLoading){
+        console.log('isLoading')
+        return<tr></tr>
+    }
+    
 
     return (
         <tr onClick={() => { history.push({
             pathname:'/leveragedAsset',
-            state: leveragedPool
+            state: props
             }) }}>
-            <td>{leveragedPool.assetName}</td>
-            <td>{leveragedPool.poolLeverage}x</td>
-            <td>{leveragedPool.volume} UST</td>
-            <td>{leveragedPool.pr}</td>
-            <td>{leveragedPool.mpr}</td>
-            <td className="right aligned">{leveragedPool.tlv} UST</td>
+            <td>{props.assetInfo.symbol}</td>
+            <td>{props.leveragedPoolInfo.leverage_amount}</td>
+            <td>TODO</td>
+            <td>TODO</td>
+            <td>{props.leveragedPoolInfo.minimum_protocol_ratio}</td>
+            <td>TODO</td>
         </tr>
     );
 }
