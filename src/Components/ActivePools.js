@@ -5,7 +5,7 @@ import LeveragedPoolRow from './LeveragedPoolRow';
 const ActivePools = ({ props }) => {
     // TODO: Rank according to highest volume
     const contractIds = props.contractIds
-    console.log(props)
+    // console.log(props)
 
 
     const Data = [

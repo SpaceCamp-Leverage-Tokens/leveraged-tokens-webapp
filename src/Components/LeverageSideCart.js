@@ -2,7 +2,6 @@ import { Container } from '@material-ui/core';
 import React from 'react';
 
 const LeverageSideCart = ({props}) => {
-    console.log(props)
 
     return (
         <Container>
@@ -12,11 +11,11 @@ const LeverageSideCart = ({props}) => {
                     <div className="ui vertical menu fluid">
                         <a className="teal item active">
                             Total Value Locked (UST)
-                            <div className="ui teal label">TODO</div>
+                            <div className="ui teal label">{props.leveragedPoolState.assets_in_reserve}</div>
                         </a>
                         <a className="item">
-                            Total Minted Value (UST)
-                            <div className="ui label">TODO</div>
+                            Total Leveraged Value (UST)
+                            <div className="ui label">{props.leveragedPoolState.total_leveraged_assets*props.assetPrices.currentLeveragedPrice}</div>
                         </a>
                         <a className="item">
                             Leverage Amount
@@ -24,11 +23,11 @@ const LeverageSideCart = ({props}) => {
                         </a>
                         <a className="item">
                             Volume (24 Hrs)
-                            <div className="ui label">TODO</div>
+                            <div className="ui label">{props.dynamicPoolValues.volume}</div>
                         </a>    
                         <a className="item">
                             Protocol Ratio
-                            <div className="ui label">TODO</div>
+                            <div className="ui label">{props.dynamicPoolValues.protocolRatio}</div>
                         </a> 
                         <a className="item">
                             Rebalance Ratio

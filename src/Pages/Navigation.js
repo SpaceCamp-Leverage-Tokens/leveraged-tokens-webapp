@@ -2,8 +2,21 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {Button, Container} from 'semantic-ui-react';
 import './css/Navigation.css'
+import { useWallet, WalletStatus } from '@terra-money/wallet-provider';
 
 const Navigation = () => {
+    const {
+        status,
+        network,
+        wallets,
+        availableConnectTypes,
+        availableInstallTypes,
+        connect,
+        install,
+        disconnect,
+      } = useWallet();
+    
+    console.log(availableConnectTypes)
     return (
     <Container id='TopBar'>
         <h2 id='Title'>Leveraged TerraSwap Pools</h2>
@@ -23,6 +36,20 @@ const Navigation = () => {
                                 Governance
                         </Button> 
                     </NavLink>
+
+                    <div>
+                        {status === WalletStatus.WALLET_NOT_CONNECTED && (
+                            <Button
+                                key={'connect-wallet'}
+                                onClick={() => connect("CHROME_EXTENSION")}
+                            >
+                            Connect Wallet <i class="sign in icon"></i>  
+                            </Button>
+                        )}
+                        {status === WalletStatus.WALLET_CONNECTED && (
+                        <Button onClick={() => disconnect()}>Disconnect <i class="sign out icon"></i>  </Button>
+                        )}
+                    </div>
             </Container>
     </Container>
        

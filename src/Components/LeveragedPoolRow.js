@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import { getPoolData } from '../Helpers/QueryHelper';
+import { leveragedPool } from '../Helpers/QueryHelper';
 
 const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
     
     const history = useHistory();
     const [props, setProps] = useState({assetInfo:{},
         leveragedPoolId:{},
-        leveragedPoolInfo:{}})
+        leveragedPoolInfo:{},
+        leveragedPoolState:{},
+        dynamicPoolValues:{}})
 
     const [isLoading, setLoading] = useState(true);
 
@@ -15,16 +17,25 @@ const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
         getPoolQuery().then(setLoading(false));
     }, []);
 
-    async function getPoolQuery(){
-        const tempPoolData = await getPoolData(leveragedPoolId,terra)
-        setProps(tempPoolData)
+    async function getPoolQuery(){        
+        const myLeveragedPool = await new leveragedPool(leveragedPoolId,terra)
+        setProps(myLeveragedPool)
+        // const data = getPoolData(leveragedPoolId,terra)
     }
 
     if (isLoading){
-        console.log('isLoading')
+        // If waiting for data don't crash
         return<tr></tr>
     }
     
+    function getProtocolRatio(){
+        const tempPr = props.dynamicPoolValues.protocolRatio
+        // TODO: multiply by current TS Price and current Leveraged Pool Price
+        if (isNaN(tempPr)){
+            return "No Assets in Reserve"
+        }
+        return tempPr
+    }
 
     return (
         <tr onClick={() => { history.push({
@@ -33,10 +44,10 @@ const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
             }) }}>
             <td>{props.assetInfo.symbol}</td>
             <td>{props.leveragedPoolInfo.leverage_amount}</td>
-            <td>TODO</td>
-            <td>TODO</td>
+            <td>{props.dynamicPoolValues.volume}</td> 
+            <td>{getProtocolRatio()}</td>
             <td>{props.leveragedPoolInfo.minimum_protocol_ratio}</td>
-            <td>TODO</td>
+            <td>{props.leveragedPoolState.assets_in_reserve}</td>
         </tr>
     );
 }

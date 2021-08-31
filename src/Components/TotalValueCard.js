@@ -6,8 +6,9 @@ import './css/TotalValueCard.css'
 const TotalValueCard = ({props}) => {
 
     function renderListItem( item ){
+        console.log(item)
         return <div className="item"> 
-            <div className="header">{item.assetName} </div>
+            <div className="header">{item.assetInfo.symbol} </div>
             100 UST
         </div>
     }
