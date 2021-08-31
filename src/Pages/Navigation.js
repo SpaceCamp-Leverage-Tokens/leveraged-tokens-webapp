@@ -16,7 +16,6 @@ const Navigation = () => {
         disconnect,
       } = useWallet();
     
-    console.log(availableConnectTypes)
     return (
     <Container id='TopBar'>
         <h2 id='Title'>Leveraged TerraSwap Pools</h2>

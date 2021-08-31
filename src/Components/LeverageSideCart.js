@@ -1,5 +1,7 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
+import { Button } from 'semantic-ui-react'
+import "./css/LeverageSideCart.css"
 
 const LeverageSideCart = ({props}) => {
 
@@ -40,9 +42,17 @@ const LeverageSideCart = ({props}) => {
                         <a className="item">
                             Leverage Mint Fee
                             <div className="ui label">0.{props.leveragedPoolInfo.mint_premium}%</div>
-                        </a>                   
+                        </a>    
                         </div>  
                     </div>
+                    <a>
+                        <div class="ui progress" data-percent="74" >
+                            <div class="bar">
+                                <div class="progress"></div>
+                            </div>                            
+                        </div>
+
+                    </a>     
                 </Container>
         </Container>
         

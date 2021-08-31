@@ -23,7 +23,7 @@ const LeveragedActions = ( {props} ) => {
             <div className="content">
                 <div>
                     <LiquidityCard props={props}/>   
-                    <hr class="solid"/>                     
+                    <hr class="Card-Dividers"/>                     
                     <LeverageCard props={props}/>
                 </div>
             </div>

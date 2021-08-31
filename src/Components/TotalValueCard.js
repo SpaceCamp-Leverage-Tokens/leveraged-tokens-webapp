@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { VictoryPie } from 'victory';
 import './css/TotalValueCard.css'
+import { Button } from 'semantic-ui-react'
 
 const TotalValueCard = ({props}) => {
 
@@ -16,12 +17,13 @@ const TotalValueCard = ({props}) => {
     return (
         <div className="ui card fluid">
             <div className="content">
-                    <Container className="Panels" style={{display:"flex"}}>
+                    <div className="Panels" style={{display:"flex"}}>
                         <Container className="Portfolio-Text">
                             <div className="ui list">
-                                <h2 className="ui header">Total Value: {"1000 UST"}</h2>
+                                <h2>Total Value: {"1000 UST"}</h2>
                                 {Object.values(props).map(renderListItem)}
                             </div>
+                            <Button>Claim Gov Rewards</Button>
                         </Container>
                         <Container>
                             <VictoryPie
@@ -37,7 +39,7 @@ const TotalValueCard = ({props}) => {
                             ]}
                             />
                         </Container>                  
-                </Container>
+                </div>
             </div>
     </div>
     );

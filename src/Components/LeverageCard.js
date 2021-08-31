@@ -22,19 +22,23 @@ const LeverageCard = ( {props} ) => {
     return (
         <Container className='Leverage-Card'>
             <Container>
-                <h3 className='ui header'>{props.title} Leveraged Position</h3>
-                <h4 className='ui header'>Current Position: {dummyPosition} {props.assetName}</h4>
+            <h3>Leveraged Position</h3>
+                <div> 
+                    <h4 className="header">30.3 {props.assetInfo.symbol} provided</h4>
+                    ~ 30 UST
+                </div>
+                <h4 >50 {props.assetInfo.symbol} in Wallet </h4>
             </Container>
             <Container>
                 <Form className="ui form">
                     <div className="field">
-                        <label>Amount</label>
+                        <label>Convert {props.assetInfo.symbol} to {props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x</label>
                         <Input type="number" 
                         name="first-name" 
                         placeholder="0"
                         type='number'
                         value={leverageMintAmount}
-                        onChange={handleRemoveChange}/>
+                        onChange={handleRemoveChange}></Input>
                     </div>
                     <Button className="ui basic green button" onClick={handleMaxClick}>Max</Button>
                     <Button className="ui basic green button">Take Leverage</Button>
@@ -43,7 +47,7 @@ const LeverageCard = ( {props} ) => {
             <Container>
                 <Form className="ui form">
                     <Form.Field className="field">
-                        <label>Amount</label>
+                        <label>Convert {props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x to {props.assetInfo.symbol}</label>
                         <Input type="number" name="first-name" placeholder="0"/>
                     </Form.Field>
                     <Button className="ui basic red button">Max</Button>

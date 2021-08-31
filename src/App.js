@@ -33,6 +33,7 @@ function App() {
     1: mainnet,
   };
 
+
   return (
     <div className="App">
       <WalletProvider
@@ -40,6 +41,10 @@ function App() {
       walletConnectChainIds={walletConnectChainIds}
     >
       <div>
+      <script
+  crossorigin
+  src="https://unpkg.com/@terra-money/terra.js/dist/bundle.js"
+></script>
           <BrowserRouter>
           <div>
             <Navigation />
