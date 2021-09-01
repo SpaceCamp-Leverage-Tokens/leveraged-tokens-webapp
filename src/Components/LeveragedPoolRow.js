@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import { leveragedPool } from '../Helpers/QueryHelper';
+import { LeveragedPool } from '../Helpers/QueryHelper';
 
 const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
     
@@ -18,7 +18,7 @@ const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
     }, []);
 
     async function getPoolQuery(){        
-        const myLeveragedPool = await new leveragedPool(leveragedPoolId,terra)
+        const myLeveragedPool = await new LeveragedPool(leveragedPoolId,terra)
         setProps(myLeveragedPool)
         // const data = getPoolData(leveragedPoolId,terra)
     }

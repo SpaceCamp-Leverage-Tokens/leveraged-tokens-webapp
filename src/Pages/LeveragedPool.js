@@ -5,7 +5,7 @@ import {Container} from 'semantic-ui-react';
 import LeverageSideCart from '../Components/LeverageSideCart';
 import './css/LeveragedPool.css'
 import LeveragedActions from '../Components/LeveragedActions';
-import { LCDClient, Coin } from '@terra-money/terra.js';
+import { LCDClient } from '@terra-money/terra.js';
 
 const LeveragedPool = ({ props }) => { 
     const location = useLocation();

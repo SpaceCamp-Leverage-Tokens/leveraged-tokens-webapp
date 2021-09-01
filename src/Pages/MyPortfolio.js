@@ -3,8 +3,8 @@ import LeveragedActions from '../Components/LeveragedActions';
 import { Container } from '@material-ui/core';
 import "./css/MyPortfolio.css"
 import TotalValueCard from '../Components/TotalValueCard';
-import { LCDClient, Coin } from '@terra-money/terra.js';
-import {  leveragedPool, mockAllContractsIds } from '../Helpers/QueryHelper';
+import { LCDClient } from '@terra-money/terra.js';
+import {  LeveragedPool, PoolFactory } from '../Helpers/QueryHelper';
 
 const MyPortfolio = () => {
    
@@ -19,12 +19,13 @@ const MyPortfolio = () => {
         queryAllData();
     },[])
 
-    const props = {contractIds: mockAllContractsIds, terra:terra}
-
     async function queryAllData(){
+        const myPoolFactory = await new PoolFactory(terra);
+
         var myLeveragedPools = [];
-        for (let i = 0; i < mockAllContractsIds.length; i++) {
-            const myTempPool = await new leveragedPool(mockAllContractsIds[i],terra)
+
+        for (let i = 0; i < myPoolFactory.poolIds.length; i++) {
+            const myTempPool = await new LeveragedPool(myPoolFactory.poolIds[i],terra)
             myLeveragedPools.push(myTempPool)
         }
         setContractInformation(myLeveragedPools)

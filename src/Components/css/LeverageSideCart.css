@@ -1,3 +1,4 @@
-.Rebalance-Button{
+.Progress-Bar{
     display: flex !important;
+    flex-direction: row;
 }

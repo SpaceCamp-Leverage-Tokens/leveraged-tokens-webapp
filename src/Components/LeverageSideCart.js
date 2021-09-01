@@ -43,16 +43,11 @@ const LeverageSideCart = ({props}) => {
                             Leverage Mint Fee
                             <div className="ui label">0.{props.leveragedPoolInfo.mint_premium}%</div>
                         </a>    
-                        </div>  
-                    </div>
-                    <a>
-                        <div class="ui progress" data-percent="74" >
-                            <div class="bar">
-                                <div class="progress"></div>
-                            </div>                            
                         </div>
-
-                    </a>     
+                        <Container>
+                            <Button className="fluid">Rebalance Pool</Button>                          
+                        </Container>
+                    </div>
                 </Container>
         </Container>
         

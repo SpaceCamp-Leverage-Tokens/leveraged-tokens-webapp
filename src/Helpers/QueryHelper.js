@@ -1,43 +1,27 @@
-export const mockAllContractsIds = ["terra19k9v4cgzyn2qzteqlusg76ckafwp2fkuhn7s6r","terra15ewuykdallc37qm9l5u0ueakcq0f8wfwsm9krk"]
+export const mockAllContractsIds = ["terra1yuyfm63a8pxfnlqfla70lyut73szvl3waqju5e","terra17ftx9xu66lacah74u6pny5uttaep8psz9xascp","terra1dl5uw9s0fzrf4ledhjhauk0j2ge2uuv3ahq9sj"];
+export const factoryId = "terra1clrgz4mhe97dpkdleqwa6lf2h4s0mvl3pm7qqt";
 
-export async function getPoolData(leveragedPoolId, terra){
-    const queryLeveragedPoolInfoPromise = await terra.wasm.contractQuery(leveragedPoolId,{
-        all_pool_info:{}
-        });
-    
-    const queryAssetInfoPromise = await terra.wasm.contractQuery(queryLeveragedPoolInfoPromise.hyperparameters.leveraged_asset_addr,
-        {
-        token_info:{}
-        });
 
-    const queryCurrentPricePromise = await terra.wasm.contractQuery(queryLeveragedPoolInfoPromise.hyperparameters.terraswap_pair_addr,
-        {
-            pool:{}
-        });
-    
-    const poolData = { assetInfo: queryAssetInfoPromise,
-        leveragedPoolId:leveragedPoolId,
-        leveragedPoolInfo: queryLeveragedPoolInfoPromise.hyperparameters,
-        leveragedPoolState: queryLeveragedPoolInfoPromise.pool_state,
-        terraSwapPoolInfo: queryCurrentPricePromise,
+export class PoolFactory{
+    constructor(terra){
+        this.factoryId = factoryId
+        return ( async () => {
+            // All async code here
+            const poolIds = await this.getPoolIds(terra)
+            this.poolIds = poolIds
+            return this; // when done
+        })();
     }
 
-    
-    return poolData
-}
-
-
-export async function getAllData(allContractsIds,terra){
-    const tempMyData = [];
-
-    for (var i=0; i<allContractsIds.length; i++) {
-        const myData = await getPoolData(allContractsIds[i],terra)
-        tempMyData.push(myData)
+    async getPoolIds(terra){
+        const queryFactoryPools = await terra.wasm.contractQuery(this.factoryId,{
+            get_pools:{}
+            });
+        return queryFactoryPools.pool_ids
     }
-    return tempMyData
 }
 
-export class leveragedPool{
+export class LeveragedPool{
     constructor(contractId, terra){
         this.contractId = contractId
         return ( async () => {

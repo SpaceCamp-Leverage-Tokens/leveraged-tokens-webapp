@@ -1,10 +1,9 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
 import LiquidityCard from './LiquidityCard';
 import LeverageCard from './LeverageCard';
 import "./css/LeveragedActions.css"
 import { useHistory } from "react-router-dom";
-import { Button, Form, Input } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 const LeveragedActions = ( {props} ) => {
     const history = useHistory();
