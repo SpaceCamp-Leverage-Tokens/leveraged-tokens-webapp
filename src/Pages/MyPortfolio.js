@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import LeveragedActions from '../Components/LeveragedActions';
-import { Container } from '@material-ui/core';
 import "./css/MyPortfolio.css"
 import TotalValueCard from '../Components/TotalValueCard';
 import { LCDClient } from '@terra-money/terra.js';

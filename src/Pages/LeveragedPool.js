@@ -9,6 +9,7 @@ import { LCDClient } from '@terra-money/terra.js';
 
 const LeveragedPool = ({ props }) => { 
     const location = useLocation();
+    
     //  const terra = new LCDClient({
     //     URL: 'https://tequila-lcd.terra.dev',
     //     chainID: 'tequila-0004',

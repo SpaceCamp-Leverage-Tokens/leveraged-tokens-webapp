@@ -1,6 +1,7 @@
-export const mockAllContractsIds = ["terra1yuyfm63a8pxfnlqfla70lyut73szvl3waqju5e","terra17ftx9xu66lacah74u6pny5uttaep8psz9xascp","terra1dl5uw9s0fzrf4ledhjhauk0j2ge2uuv3ahq9sj"];
-export const factoryId = "terra1clrgz4mhe97dpkdleqwa6lf2h4s0mvl3pm7qqt";
+import { LCDClient, MsgExecuteContract } from "@terra-money/terra.js";
+import { sendTransaction } from "./helpers";
 
+export const factoryId = "terra1edqzdggfclw6t5dg8y0n05kk0k7te3ra5n6yw9";
 
 export class PoolFactory{
     constructor(terra){
@@ -19,6 +20,28 @@ export class PoolFactory{
             });
         return queryFactoryPools.pool_ids
     }
+
+    async resetLeveragePriceReference(terra, user){
+
+        // just to test that button works etc
+        const levPoolsHyperParams = {
+            leverage_amount:3,
+            leveraged_asset_addr: "terra1atgpe9ypjg037ahw8yjzydzkesaudhu7kp0fac",
+            minimum_protocol_ratio: 2,
+            mint_premium: 3,
+            rebalance_premium: 1,
+            rebalance_ratio: 3,
+            terraswap_pair_addr: "terra1quuj8vzvg3phu0qemtpxn2dj983qnuga5fegqn",
+          }
+
+          ///TODO:Change to reset leverage command 
+        await sendTransaction(terra, user, [
+            new MsgExecuteContract(user.key.accAddress, this.factoryId, {
+              create_new_pool: { pool_instantiate_msg:levPoolsHyperParams }
+            }),
+          ]);
+    }
+
 }
 
 export class LeveragedPool{
@@ -36,6 +59,13 @@ export class LeveragedPool{
             this.dynamicPoolValues = this.getDynamicValues()
             return this; // when done
         })();
+    }
+
+    async getHistoricalData(terra){
+        const queryHistoricalData = await terra.wasm.contractQuery(this.contractId,{
+            asset_price_history:{}
+            });
+        return queryHistoricalData.price_history
     }
 
     get24Volume(){

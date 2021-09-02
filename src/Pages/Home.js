@@ -5,6 +5,7 @@ import "./css/Home.css"
 import ActivePools from '../Components/ActivePools';
 import { LCDClient } from '@terra-money/terra.js';
 import { PoolFactory } from '../Helpers/QueryHelper';
+import ResetReferenceCard from '../Components/ResetReferenceCard';
 
 const Home = ( ) => {
   const DummyTlv=[
@@ -31,9 +32,14 @@ const Home = ( ) => {
 
   const [factory, setFactory] = useState({poolIds:[]})
 
-    useEffect( ()=> {
-      getFactory();
-    }, []);
+  useEffect( ()=> {
+    getFactory();
+  },[]);
+
+  const terra = new LCDClient({
+    URL: 'http://localhost:1317',
+    chainID: 'localterra'
+  });
 
   async function getFactory(){        
     const myPoolFactory = await new PoolFactory(terra);
@@ -44,13 +50,7 @@ const Home = ( ) => {
   //   URL: 'https://tequila-lcd.terra.dev',
   //   chainID: 'tequila-0004',
   // });
-  
-  // To use LocalTerra
-
-  const terra = new LCDClient({
-    URL: 'http://localhost:1317',
-    chainID: 'localterra'
-  });
+    
 
   const props = {contractIds: factory.poolIds, terra:terra}
 
@@ -61,6 +61,7 @@ const Home = ( ) => {
               <HomeChartCard className="Chart" Title={"Total Value Locked"} Data={DummyTlv} />
               <HomeChartCard className="Chart" Title={"Trade Volume"} Data={DummyVol}/>
               <HomeChartCard className="Chart" Title={"Governance Token Price"} Data={DummyGov}/>
+              <ResetReferenceCard className="Chart" Title={"Reset Leverage Price points"} Factory={factory}/>
             </Container>
             
             <ActivePools props={props}/>

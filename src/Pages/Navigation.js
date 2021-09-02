@@ -7,12 +7,7 @@ import { useWallet, WalletStatus } from '@terra-money/wallet-provider';
 const Navigation = () => {
     const {
         status,
-        network,
-        wallets,
-        availableConnectTypes,
-        availableInstallTypes,
         connect,
-        install,
         disconnect,
       } = useWallet();
     

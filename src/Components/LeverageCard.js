@@ -5,7 +5,6 @@ import { Button, Form, Input } from 'semantic-ui-react'
 
 const LeverageCard = ( {props} ) => {
     const [leverageMintAmount, setLeverageMintAmount] = useState(0)
-    const dummyPosition = 10000000
 
     function getMaxMintable(){
         return Math.min( (props.tlv - props.rbr*props.tmv)/(props.rbr*(1 - props.mintfee) - 1) )
@@ -24,7 +23,7 @@ const LeverageCard = ( {props} ) => {
             <Container>
             <h3>Leveraged Position</h3>
                 <div> 
-                    <h4 className="header">30.3 {props.assetInfo.symbol} provided</h4>
+                    <h4 className="header">30.3 {props.assetInfo.symbol} owned in pool</h4>
                     ~ 30 UST
                 </div>
                 <h4 >50 {props.assetInfo.symbol} in Wallet </h4>
@@ -36,7 +35,6 @@ const LeverageCard = ( {props} ) => {
                         <Input type="number" 
                         name="first-name" 
                         placeholder="0"
-                        type='number'
                         value={leverageMintAmount}
                         onChange={handleRemoveChange}></Input>
                     </div>

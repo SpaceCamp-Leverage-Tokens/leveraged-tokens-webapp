@@ -7,7 +7,7 @@ import { Button } from 'semantic-ui-react'
 const TotalValueCard = ({props}) => {
 
     function renderListItem( item ){
-        console.log(item)
+        // console.log(item)
         return <div className="item"> 
             <div className="header">{item.assetInfo.symbol} </div>
             100 UST

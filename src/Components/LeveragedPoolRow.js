@@ -15,7 +15,7 @@ const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
 
     useEffect( ()=> {
         getPoolQuery().then(setLoading(false));
-    }, []);
+    });
 
     async function getPoolQuery(){        
         const myLeveragedPool = await new LeveragedPool(leveragedPoolId,terra)

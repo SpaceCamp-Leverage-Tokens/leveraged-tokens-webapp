@@ -18,14 +18,14 @@ const LiquidityCard = ( {props} ) => {
     function handleMaxClick(){
         setRemoveAmount(getMaxWithdrawable())
     }
-    console.log(props)
+    // console.log(props)
 
     return (
         <Container className='Liquidity-Card'>
             <Container>
                 <h3>Liquidity/Hedged Position</h3>
                 <div> 
-                    <h4 className="header">100.7 {props.assetInfo.symbol} provided</h4>
+                    <h4 className="header">100.7 {props.assetInfo.symbol} owned in pool</h4>
                     ~ 100 UST
                 </div>
                 <h4 >50 {props.assetInfo.symbol} in Wallet </h4>
@@ -50,7 +50,6 @@ const LiquidityCard = ( {props} ) => {
                         <Input type="number" 
                         name="first-name" 
                         placeholder="0"
-                        type='number'
                         value={removeAmount}
                         onChange={handleRemoveChange}/>
                     </div>

@@ -6,14 +6,7 @@ const ActivePools = ({ props }) => {
     // TODO: Rank according to highest volume
     const contractIds = props.contractIds
     // console.log(props)
-
-
-    const Data = [
-        {assetName:"Luna",poolLeverage:3,volume:40123,tlv:221000,pr:4,mpr:3,rbr:3.5,tmv:50000,mintfee:0.003},
-        {assetName:"mTSLA",poolLeverage:2,volume:1323,tlv:20000,pr:6,mpr:3,rbr:3.5,tmv:1290,mintfee:0.003},
-        {assetName:"mAPPL",poolLeverage:3,volume:466,tlv:30000,pr:3.4,mpr:2.5,rbr:3,tmv:1200,mintfee:0.003},
-    ]
-
+    
     const renderLeveragedPoolRow = (leveragedPoolId) => {
         return(
         <LeveragedPoolRow leveragedPoolId={leveragedPoolId} terra={props.terra}/>
@@ -23,7 +16,10 @@ const ActivePools = ({ props }) => {
     return (
         <div className="ui card fluid">
             <div className="content">
-            <h3 className="ui header">Most Active Pools</h3>
+                <div className="Title">
+                    <h3 className="ui header">Most Active Pools</h3>
+                </div>
+            
                 <table className="ui selectable inverted large table">
                 <thead>
                     <tr>

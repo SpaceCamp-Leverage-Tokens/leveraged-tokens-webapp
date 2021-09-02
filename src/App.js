@@ -8,9 +8,7 @@ import 'semantic-ui-css/semantic.min.css'
 import React from 'react';
 import MyPortfolio from './Pages/MyPortfolio';
 import {
-  NetworkInfo,
   WalletProvider,
-  WalletStatus,
 } from '@terra-money/wallet-provider';
 
 function App() {
