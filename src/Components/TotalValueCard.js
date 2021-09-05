@@ -20,7 +20,7 @@ const TotalValueCard = ({props}) => {
                     <div className="Panels" style={{display:"flex"}}>
                         <Container className="Portfolio-Text">
                             <div className="ui list">
-                                <h2>Total Value: {"1000 UST"}</h2>
+                                <h2>Total Value: {"300 UST"}</h2>
                                 {Object.values(props).map(renderListItem)}
                             </div>
                             <Button>Claim Gov Rewards</Button>
@@ -33,9 +33,9 @@ const TotalValueCard = ({props}) => {
                             endAngle={450}
                             innerRadius={50}
                             data={[
-                                { x: 1, y: 2, label: "Luna" },
-                                { x: 2, y: 3, label: "mTSLA" },
-                                { x: 3, y: 5, label: "mAPPL" }
+                                { x: 1, y: 1, label: "MIR" },
+                                { x: 2, y: 1, label: "MIR" },
+                                { x: 3, y: 1, label: "MIR" }
                             ]}
                             />
                         </Container>                  

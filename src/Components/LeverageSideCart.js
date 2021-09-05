@@ -4,7 +4,6 @@ import { Button } from 'semantic-ui-react'
 import "./css/LeverageSideCart.css"
 
 const LeverageSideCart = ({props}) => {
-
     return (
         <Container>
             <Container className="ui card fluid"> 
@@ -17,7 +16,7 @@ const LeverageSideCart = ({props}) => {
                         </a>
                         <a className="item">
                             Total Leveraged Value (UST)
-                            <div className="ui label">{props.leveragedPoolState.total_leveraged_assets*props.assetPrices.currentLeveragedPrice}</div>
+                            <div className="ui label">{props.leveragedPoolState.total_leveraged_assets*props.price_context.current_snapshot.leveraged_price}</div>
                         </a>
                         <a className="item">
                             Leverage Amount

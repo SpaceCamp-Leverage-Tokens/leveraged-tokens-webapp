@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 
 
 const ResetReferenceCard = ({Title, Factory}) => {
-    const terra = new LocalTerra()
+    const terra = new LocalTerra
 
     const classes = useStyles();
     

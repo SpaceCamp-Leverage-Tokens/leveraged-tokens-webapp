@@ -5,7 +5,9 @@ import { LeveragedPool } from '../Helpers/QueryHelper';
 const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
     
     const history = useHistory();
-    const [props, setProps] = useState({assetInfo:{},
+    const [props, setProps] = useState({
+        price_context:{},
+        assetInfo:{},
         leveragedPoolId:{},
         leveragedPoolInfo:{},
         leveragedPoolState:{},
@@ -14,8 +16,8 @@ const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect( ()=> {
-        getPoolQuery().then(setLoading(false));
-    });
+        getPoolQuery().then(setLoading(false))
+    },[]);
 
     async function getPoolQuery(){        
         const myLeveragedPool = await new LeveragedPool(leveragedPoolId,terra)

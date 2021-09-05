@@ -1,7 +1,6 @@
 import { LCDClient, MsgExecuteContract } from "@terra-money/terra.js";
-import { sendTransaction } from "./helpers";
-
-export const factoryId = "terra1edqzdggfclw6t5dg8y0n05kk0k7te3ra5n6yw9";
+import { sendTransaction, queryTokenBalance, toEncodedBinary } from "./helpers";
+export const factoryId = "terra1s5gjdrhmm0sq0kfplg66y6zakqy9sx3lq9c9py";
 
 export class PoolFactory{
     constructor(terra){
@@ -9,9 +8,18 @@ export class PoolFactory{
         return ( async () => {
             // All async code here
             const poolIds = await this.getPoolIds(terra)
+            const timestamp = await this.getLastResetTimestamp(terra)
+            this.lastRestampTime = timestamp
             this.poolIds = poolIds
             return this; // when done
         })();
+    }
+
+    async getLastResetTimestamp(terra){
+        const queryFactoryPools = await terra.wasm.contractQuery(this.factoryId,{
+            get_last_reset:{}
+            });
+        return queryFactoryPools.timestamp
     }
 
     async getPoolIds(terra){
@@ -34,7 +42,7 @@ export class PoolFactory{
             terraswap_pair_addr: "terra1quuj8vzvg3phu0qemtpxn2dj983qnuga5fegqn",
           }
 
-          ///TODO:Change to reset leverage command 
+          ///TODO: Change to reset leverage command 
         await sendTransaction(terra, user, [
             new MsgExecuteContract(user.key.accAddress, this.factoryId, {
               create_new_pool: { pool_instantiate_msg:levPoolsHyperParams }
@@ -51,15 +59,42 @@ export class LeveragedPool{
             // All async code here
             const poolData = await this.getPoolData(contractId,terra);
             this.assetInfo = poolData.assetInfo;
+            this.price_context = poolData.price_context;
             this.leveragedPoolId = poolData.leveragedPoolId;
             this.leveragedPoolInfo = poolData.leveragedPoolInfo;
             this.leveragedPoolState = poolData.leveragedPoolState;
             this.terraSwapPoolInfo = poolData.terraSwapPoolInfo;
-            this.assetPrices = this.getCurrentPrices()
             this.dynamicPoolValues = this.getDynamicValues()
+            this.underlyingAssetAddr = this.leveragedPoolInfo.leveraged_asset_addr
             return this; // when done
         })();
     }
+
+    async addLiquidity(terra, user, amountOfAsset){
+        await sendTransaction(terra, user, [
+            new MsgExecuteContract(user.key.accAddress, this.underlyingAssetAddr, {
+              send: {
+                contract: this.contractId,
+                amount: amountOfAsset,  
+                msg: toEncodedBinary({
+                  provide_liquidity: { },
+                }),   
+              },
+            }),
+          ]);
+    }
+
+    async withdrawLiquidity(terra, user, amountOfShares){
+        await sendTransaction(terra, user, [
+            new MsgExecuteContract(user.key.accAddress, this.contractId, {
+              withdraw_liquidity:{
+                share_of_pool:amountOfShares
+              }
+            }),
+          ]);
+    }
+
+
 
     async getHistoricalData(terra){
         const queryHistoricalData = await terra.wasm.contractQuery(this.contractId,{
@@ -68,16 +103,36 @@ export class LeveragedPool{
         return queryHistoricalData.price_history
     }
 
+    async getMyBalanceInPool(terra, wallet){
+        console.log(wallet)
+        const myPoolShare = await terra.wasm.contractQuery(this.leveragedPoolId,{
+            liquidity_position:{
+              address:wallet
+            }
+          })
+          const myBalance = {
+            raw: myPoolShare.position.asset_pool_partial_share,
+            ust: this.convertToUST(myPoolShare.position.asset_pool_partial_share)
+        }
+          return myBalance
+    }
+
+    convertToUST(amount){
+        return 10e-6*amount*parseInt(this.price_context.current_snapshot.asset_price).toFixed(2)
+    }
+
+    async getMyBalance(terra, wallet){
+        const myTokenBalance = await queryTokenBalance(terra,wallet, this.leveragedPoolInfo.leveraged_asset_addr);
+
+        const myBalance = {
+            raw: myTokenBalance,
+            ust: this.convertToUST(myTokenBalance)
+        }
+        return myBalance
+    }
+
     get24Volume(){
         return 0 
-    }
-    getCurrentPrices(){
-        const currentAssetPrice = 1e6*this.terraSwapPoolInfo.assets[1].amount / this.terraSwapPoolInfo.assets[0].amount
-        const percentIncrease = this.leveragedPoolInfo.leverage_amount*(currentAssetPrice - this.leveragedPoolState.asset_opening_price.u_price)/this.leveragedPoolState.asset_opening_price.u_price
-        const currentLeveragedPrice = (1+percentIncrease)*this.leveragedPoolState.leveraged_opening_price.u_price
-        return {currentAssetPrice: currentAssetPrice,
-            percentIncrease: percentIncrease,
-            currentLeveragedPrice: currentLeveragedPrice}
     }
 
     getDynamicValues(){
@@ -112,6 +167,7 @@ export class LeveragedPool{
                     leveragedPoolInfo: queryLeveragedPoolInfoPromise.hyperparameters,
                     leveragedPoolState: queryLeveragedPoolInfoPromise.pool_state,
                     terraSwapPoolInfo: queryCurrentPricePromise,
+                    price_context: queryLeveragedPoolInfoPromise.price_context,
                 }
             
 

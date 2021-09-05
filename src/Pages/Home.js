@@ -30,12 +30,13 @@ const Home = ( ) => {
     { x: 5, y: 4.2 }
   ]
 
-  const [factory, setFactory] = useState({poolIds:[]})
+  const [factory, setFactory] = useState({poolIds:[],lastRestampTime:0})
 
   useEffect( ()=> {
     getFactory();
   },[]);
 
+  console.log("Hello")
   const terra = new LCDClient({
     URL: 'http://localhost:1317',
     chainID: 'localterra'
@@ -43,6 +44,7 @@ const Home = ( ) => {
 
   async function getFactory(){        
     const myPoolFactory = await new PoolFactory(terra);
+    console.log(myPoolFactory)
     setFactory(myPoolFactory)
   }
       
