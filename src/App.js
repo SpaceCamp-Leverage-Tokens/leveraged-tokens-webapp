@@ -24,18 +24,24 @@ function App() {
     lcd: 'https://tequila-lcd.terra.dev',
   };
 
+    const local = {
+    name: 'localterra',
+    chainID: 'localterra',
+    lcd: 'http://localhost:1317',
+  };
   // WalletConnect separates chainId by number.
   // Currently TerraStation Mobile uses 0 as Testnet, 1 as Mainnet.
   const walletConnectChainIds = {
     0: testnet,
     1: mainnet,
+    2: local
   };
 
 
   return (
     <div className="App">
       <WalletProvider
-      defaultNetwork={mainnet}
+      defaultNetwork={local}
       walletConnectChainIds={walletConnectChainIds}
     >
       <div>

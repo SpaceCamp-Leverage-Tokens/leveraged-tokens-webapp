@@ -14,6 +14,7 @@ const LiquidityCard = ( { props } ) => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [assetInPool, setAssetInPool] = useState(0)
+    const [totalLP, setTotalLP] = useState(0)
     const [assetInPoolUST, setAssetInPoolUST] = useState("")
 
     const [assetInWallet, setAssetInWallet] = useState(0)
@@ -28,6 +29,7 @@ const LiquidityCard = ( { props } ) => {
         const myTokenBalance = await props.getMyBalance(terra,myWallet.key.accAddress)
         const myTokenBalanceInPool = await props.getMyBalanceInPool(terra,myWallet.key.accAddress)
 
+        setTotalLP(myTokenBalanceInPool.total)
         setAssetInPool(myTokenBalanceInPool.raw)
         setAssetInPoolUST(myTokenBalanceInPool.ust)
         setAssetInWallet(myTokenBalance.raw)
@@ -80,7 +82,7 @@ const LiquidityCard = ( { props } ) => {
                 <Container>
                     <h3>Liquidity/Hedged Position</h3>
                     <div> 
-                        <h4 className="header">{assetInPool} {props.assetInfo.symbol} owned in pool</h4>
+                        <h4 className="header">{assetInPool} LP Shares owned in pool <h4>{totalLP} LP Shares in total</h4> </h4>
                         ~ {assetInPoolUST} UST
                     </div>
                     <h4 >{assetInWallet} {props.assetInfo.symbol} in Wallet </h4>
@@ -103,7 +105,7 @@ const LiquidityCard = ( { props } ) => {
                 <Container>
                     <Form className="ui form">
                         <div className="field">
-                            <label>Remove {props.assetInfo.symbol} from Pool</label>
+                            <label>Remove LP Shares from Pool</label>
                             <Input type="number" 
                             name="first-name" 
                             placeholder="0"

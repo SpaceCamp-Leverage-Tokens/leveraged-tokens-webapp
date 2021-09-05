@@ -41,16 +41,18 @@ const Home = ( ) => {
     chainID: 'localterra'
   });
 
+  // const terra = new LCDClient({
+  //   URL: 'https://tequila-lcd.terra.dev',
+  //   chainID: 'tequila-0004',
+  // });
+
   async function getFactory(){        
     const myPoolFactory = await new PoolFactory(terra);
     console.log(myPoolFactory)
     setFactory(myPoolFactory)
   }
       
-  // const terra = new LCDClient({
-  //   URL: 'https://tequila-lcd.terra.dev',
-  //   chainID: 'tequila-0004',
-  // });
+
     
 
   const props = {contractIds: factory.poolIds, terra:terra}

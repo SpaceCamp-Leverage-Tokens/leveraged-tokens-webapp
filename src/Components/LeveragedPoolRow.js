@@ -49,7 +49,7 @@ const LeveragedPoolRow = ({leveragedPoolId, terra}) => {
             <td>{props.dynamicPoolValues.volume}</td> 
             <td>{getProtocolRatio()}</td>
             <td>{props.leveragedPoolInfo.minimum_protocol_ratio}</td>
-            <td>{props.leveragedPoolState.assets_in_reserve}</td>
+            <td>{props.dynamicPoolValues.totalLockedValue} UST </td>
         </tr>
     );
 }

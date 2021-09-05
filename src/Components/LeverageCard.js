@@ -13,6 +13,9 @@ const LeverageCard = ( {props} ) => {
     function handleRemoveChange(e){
         setLeverageMintAmount(e.target.value)
     }
+
+    console.log(props)
+
     function handleMaxClick(){
         setLeverageMintAmount(getMaxMintable())
         console.log("Max amount leverage")

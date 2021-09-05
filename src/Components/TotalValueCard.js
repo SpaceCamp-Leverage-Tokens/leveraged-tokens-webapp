@@ -5,8 +5,10 @@ import './css/TotalValueCard.css'
 import { Button } from 'semantic-ui-react'
 import { LocalTerra, LCDClient, MsgExecuteContract } from '@terra-money/terra.js';
 import { tsMappedType } from '@babel/types';
+import { useWallet } from '@terra-money/wallet-provider';
 
 const TotalValueCard = ({props}) => {
+    const { status, network, wallets } = useWallet();
 
     const terra = new LocalTerra;
     const myWallet = terra.wallets.test3;
@@ -26,7 +28,7 @@ const TotalValueCard = ({props}) => {
             const pool_earning = await props[pool_index].getMyBalanceInPool(terra,myWallet.key.accAddress)
             pool_earning.symbol = props[pool_index].assetInfo.symbol
             tempPositions.push(pool_earning)
-            temp_total_val += pool_earning.ust
+            temp_total_val += parseFloat(pool_earning.ust)
 
             tmpCircleData.push({
                 x:pool_index+1,
@@ -41,7 +43,7 @@ const TotalValueCard = ({props}) => {
     function renderListItem( item ){
         // console.log(item)
         return <div className="item"> 
-            <div className="header">{item.raw} : {item.symbol} ~ {item.ust} UST</div>
+            <div className="header">{item.raw} LP Shares: {item.symbol} ~ {item.ust} UST</div>
             
         </div>
     }

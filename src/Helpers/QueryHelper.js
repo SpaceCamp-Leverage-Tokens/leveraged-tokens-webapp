@@ -84,6 +84,10 @@ export class LeveragedPool{
           ]);
     }
 
+    getTotalMintedValue(){
+        
+    }
+
     async withdrawLiquidity(terra, user, amountOfShares){
         await sendTransaction(terra, user, [
             new MsgExecuteContract(user.key.accAddress, this.contractId, {
@@ -109,9 +113,13 @@ export class LeveragedPool{
               address:wallet
             }
           })
+
+          const myShare = this.dynamicPoolValues.totalLockedValue*myPoolShare.position.asset_pool_partial_share/myPoolShare.position.asset_pool_total_share;
+
           const myBalance = {
             raw: myPoolShare.position.asset_pool_partial_share,
-            ust: this.convertToUST(myPoolShare.position.asset_pool_partial_share)
+            total: myPoolShare.position.asset_pool_total_share,
+            ust: (10e-6*myShare).toFixed(2)
         }
           return myBalance
     }
@@ -135,8 +143,8 @@ export class LeveragedPool{
     }
 
     getDynamicValues(){
-        const totLockVal = this.currentAssetPrice*this.leveragedPoolState.assets_in_reserve
-        const totLevVal = this.currentLeveragedPrice*this.leveragedPoolState.total_leveraged_assets
+        const totLockVal = (this.price_context.current_snapshot.asset_price*this.leveragedPoolState.assets_in_reserve*10e-6).toFixed(2)
+        const totLevVal = this.price_context.current_snapshot.leveraged_price*this.leveragedPoolState.total_leveraged_assets
         const PR = totLockVal/totLevVal
         const vol = this.get24Volume()
 

@@ -4,9 +4,11 @@ import "./css/MyPortfolio.css"
 import TotalValueCard from '../Components/TotalValueCard';
 import { LCDClient } from '@terra-money/terra.js';
 import {  LeveragedPool, PoolFactory } from '../Helpers/QueryHelper';
+import { useWallet } from '@terra-money/wallet-provider';
 
 const MyPortfolio = () => {
-   
+    const { status, network, wallets } = useWallet();
+
     const [contractInformation, setContractInformation] = useState(0)
 
     const terra = new LCDClient({

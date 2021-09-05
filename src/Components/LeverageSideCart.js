@@ -11,7 +11,7 @@ const LeverageSideCart = ({props}) => {
                     <h2 className="ui header">Pool Information</h2>
                     <div className="ui vertical menu fluid">
                         <a className="teal item active">
-                            Total Value Locked (UST)
+                            Total Value Locked ({props.assetInfo.symbol})
                             <div className="ui teal label">{props.leveragedPoolState.assets_in_reserve}</div>
                         </a>
                         <a className="item">
