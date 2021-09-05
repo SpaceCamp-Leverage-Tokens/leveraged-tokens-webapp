@@ -36,7 +36,6 @@ const Home = ( ) => {
     getFactory();
   },[]);
 
-  console.log("Hello")
   const terra = new LCDClient({
     URL: 'http://localhost:1317',
     chainID: 'localterra'

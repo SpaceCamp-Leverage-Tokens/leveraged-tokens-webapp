@@ -15,18 +15,19 @@ const LeverageChart = ({ props }) => {
 
   useEffect( ()=> {
     getData();
-  });
+  },[]);
+
 
   async function getData(){        
     const historicalData = await props.getHistoricalData(terra);
-    const levHistoricalData = await props.getHistoricalData(terra);
 
     const myParsedData = parseData(historicalData)
-    const myLevParsedData = parseData(levHistoricalData)
+    const myLevParsedData = parseData(historicalData)
 
+    console.log(myParsedData)
     setHistoricalData(myParsedData)
    
-    myLevParsedData[1].y = myLevParsedData[1].y + 2000;
+    myLevParsedData[1].y = myLevParsedData[1].y + 20;
     setLevHistoricalData(myLevParsedData)
   }
 
@@ -35,13 +36,13 @@ const LeverageChart = ({ props }) => {
     for(let i = 0; i<data.length; i++){
       myParsedData.push({
         x: new Date(data[i].timestamp * 1000),
-        y: data[i].u_price
+        y: data[i].asset_price*10e-6
       })
 
       // TODO Remove After real data
       myParsedData.push({
         x: new Date(data[i].timestamp * 1000 + 1000000000),
-        y: data[i].u_price + 100
+        y: data[i].asset_price*10e-6 + 100
       })
     }
     return myParsedData

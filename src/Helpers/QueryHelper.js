@@ -98,13 +98,12 @@ export class LeveragedPool{
 
     async getHistoricalData(terra){
         const queryHistoricalData = await terra.wasm.contractQuery(this.contractId,{
-            asset_price_history:{}
+            price_history:{}
             });
         return queryHistoricalData.price_history
     }
 
     async getMyBalanceInPool(terra, wallet){
-        console.log(wallet)
         const myPoolShare = await terra.wasm.contractQuery(this.leveragedPoolId,{
             liquidity_position:{
               address:wallet

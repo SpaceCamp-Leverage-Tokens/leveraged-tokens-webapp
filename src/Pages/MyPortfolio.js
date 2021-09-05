@@ -28,7 +28,6 @@ const MyPortfolio = () => {
             myLeveragedPools.push(myTempPool)
         }
         setContractInformation(myLeveragedPools)
-        console.log(myLeveragedPools)
     }
 
     function getLeverageActionCards( pool ){
