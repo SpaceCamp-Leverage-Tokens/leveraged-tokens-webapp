@@ -1,6 +1,6 @@
 import { LCDClient, MsgExecuteContract } from "@terra-money/terra.js";
 import { sendTransaction, queryTokenBalance, toEncodedBinary } from "./helpers";
-export const factoryId = "terra1s5gjdrhmm0sq0kfplg66y6zakqy9sx3lq9c9py";
+export const factoryId = "terra1mwkg85mc3mv7lshgw4mn5dw3q6yku778glt46e";
 
 export class PoolFactory{
     constructor(terra){
@@ -84,8 +84,18 @@ export class LeveragedPool{
           ]);
     }
 
-    getTotalMintedValue(){
-        
+    async mintLeveragePosition(terra, user, amountOfAsset){
+        await sendTransaction(terra, user, [
+            new MsgExecuteContract(user.key.accAddress, this.underlyingAssetAddr, {
+              send: {
+                contract: this.contractId,
+                amount: amountOfAsset,  
+                msg: toEncodedBinary({
+                    mint_leveraged_position: { },
+                }),   
+              },
+            }),
+          ]);
     }
 
     async withdrawLiquidity(terra, user, amountOfShares){
@@ -115,13 +125,41 @@ export class LeveragedPool{
           })
 
           const myShare = this.dynamicPoolValues.totalLockedValue*myPoolShare.position.asset_pool_partial_share/myPoolShare.position.asset_pool_total_share;
+          var ust = (10e-6*myShare).toFixed(2)
+          
+          if (isNaN(ust) ){
+              ust = 0
+          }
 
           const myBalance = {
             raw: myPoolShare.position.asset_pool_partial_share,
             total: myPoolShare.position.asset_pool_total_share,
-            ust: (10e-6*myShare).toFixed(2)
+            ust: ust
         }
           return myBalance
+    }
+
+    async getMyLevBalanceInPool(terra, wallet){
+        
+        const myPoolShare = await terra.wasm.contractQuery(this.leveragedPoolId,{
+            leveraged_position:{
+              address:wallet
+            }
+          })
+        
+        const myShare = myPoolShare.position.leveraged_pool_partial_share*this.price_context.current_snapshot.leveraged_price;
+        var ust = (10e-6*myShare).toFixed(2)
+        
+        if (isNaN(ust) ){
+            ust = 0
+        }
+
+        const myBalance = {
+        raw: myPoolShare.position.leveraged_pool_partial_share,
+        total: myPoolShare.position.leveraged_pool_total_share,
+        ust: ust
+        }
+        return myBalance
     }
 
     convertToUST(amount){
@@ -144,8 +182,8 @@ export class LeveragedPool{
 
     getDynamicValues(){
         const totLockVal = (this.price_context.current_snapshot.asset_price*this.leveragedPoolState.assets_in_reserve*10e-6).toFixed(2)
-        const totLevVal = this.price_context.current_snapshot.leveraged_price*this.leveragedPoolState.total_leveraged_assets
-        const PR = totLockVal/totLevVal
+        const totLevVal = (this.price_context.current_snapshot.leveraged_price*this.leveragedPoolState.total_leveraged_assets*10e-6).toFixed(2)
+        const PR = (totLockVal/totLevVal).toFixed(2)
         const vol = this.get24Volume()
 
         return {totalLockedValue:totLockVal,

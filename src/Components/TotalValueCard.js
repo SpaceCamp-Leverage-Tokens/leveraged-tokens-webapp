@@ -26,15 +26,34 @@ const TotalValueCard = ({props}) => {
         var temp_total_val = 0
         for( let pool_index = 0; pool_index < props.length; pool_index++){
             const pool_earning = await props[pool_index].getMyBalanceInPool(terra,myWallet.key.accAddress)
-            pool_earning.symbol = props[pool_index].assetInfo.symbol
-            tempPositions.push(pool_earning)
-            temp_total_val += parseFloat(pool_earning.ust)
+            if (pool_earning.ust > 0){
+                pool_earning.symbol = props[pool_index].assetInfo.symbol
+                tempPositions.push(pool_earning)
+                temp_total_val += parseFloat(pool_earning.ust)
+    
+                tmpCircleData.push({
+                    x:2*pool_index,
+                    y:pool_earning.ust,
+                    label:pool_earning.symbol,
+                })
+            }         
 
-            tmpCircleData.push({
-                x:pool_index+1,
-                y:pool_earning.ust,
-                label:pool_earning.symbol,
-            })
+            const pool_lev_earning = await props[pool_index].getMyLevBalanceInPool(terra,myWallet.key.accAddress)
+            if (pool_lev_earning.ust> 0){
+                pool_lev_earning.symbol = props[pool_index].assetInfo.symbol +" "+ props[pool_index].leveragedPoolInfo.leverage_amount +"x"
+                console.log(pool_lev_earning)
+                tempPositions.push(pool_lev_earning)
+                temp_total_val += parseFloat(pool_lev_earning.ust)
+
+    
+                tmpCircleData.push({
+                    x:(2*pool_index)+1,
+                    y:pool_lev_earning.ust,
+                    label:pool_lev_earning.symbol,
+                })
+            }
+
+            
         }
         setPositions(tempPositions);
         setTotalVal(temp_total_val);

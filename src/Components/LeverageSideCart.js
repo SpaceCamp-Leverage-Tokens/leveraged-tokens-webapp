@@ -16,7 +16,7 @@ const LeverageSideCart = ({props}) => {
                         </a>
                         <a className="item">
                             Total Leveraged Value (UST)
-                            <div className="ui label">{props.leveragedPoolState.total_leveraged_assets*props.price_context.current_snapshot.leveraged_price}</div>
+                            <div className="ui label">{props.dynamicPoolValues.totalLeveragedValue}</div>
                         </a>
                         <a className="item">
                             Leverage Amount

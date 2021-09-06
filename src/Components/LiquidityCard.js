@@ -35,8 +35,6 @@ const LiquidityCard = ( { props } ) => {
         setAssetInWallet(myTokenBalance.raw)
     }
 
-    const dummyPosition = 100000
-
     function getMaxWithdrawable(){
         return Math.min(assetInPool )
     }
