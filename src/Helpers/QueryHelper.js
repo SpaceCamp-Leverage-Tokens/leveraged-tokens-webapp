@@ -1,12 +1,17 @@
 import { LCDClient, MsgExecuteContract,MnemonicKey } from "@terra-money/terra.js";
 import { sendTransaction, queryTokenBalance, toEncodedBinary } from "./helpers";
 
-export const factoryId = "terra1yr676ux2hncy2ufc86z54kr9ltjt883whj30d8";
-export const mk = new MnemonicKey({mnemonic:"symbol force gallery make bulk round subway violin worry mixture penalty kingdom boring survey tool fringe patrol sausage hard admit remember broken alien absorb"})
+export const factoryId = "terra16rwaapxm53ylv332z8wzc8fmz568wyxywtpdvw";
+// export const mk = new MnemonicKey({mnemonic:"symbol force gallery make bulk round subway violin worry mixture penalty kingdom boring survey tool fringe patrol sausage hard admit remember broken alien absorb"})
+export const mk = new MnemonicKey({mnemonic:"arena wisdom monkey aspect blanket peanut hurt because youth trophy vault lesson rookie trial loan below adult gate cactus fetch spoon ignore satisfy ride"})
+// export const localTerraObj = {
+//     URL: 'http://localhost:1317',
+//     chainID: 'localterra'
+// }
 
-export const localTerraObj = {
-    URL: 'http://localhost:1317',
-    chainID: 'localterra'
+export const localTerraObj= {
+    URL: 'https://bombay-lcd.terra.dev/',
+    chainID: 'bombay-10'
 }
 
 export class PoolFactory{
@@ -69,7 +74,7 @@ export class LeveragedPool{
             this.price_context = poolData.price_context;
             this.leveragedPoolId = poolData.leveragedPoolId;
             this.leveragedPoolInfo = poolData.leveragedPoolInfo;
-            this.leveragedPoolInfo.leverage_amount =  (poolData.leveragedPoolInfo.leverage_amount*10e-6).toFixed(1);
+            this.leveragedPoolInfo.leverage_amount =  (poolData.leveragedPoolInfo.leverage_amount*10e-7).toFixed(1);
 
             this.leveragedPoolState = poolData.leveragedPoolState;
             this.terraSwapPoolInfo = poolData.terraSwapPoolInfo;
@@ -117,7 +122,15 @@ export class LeveragedPool{
           ]);
     }
 
-
+    async burnLeveragePosition(terra, user, amountOfShares){
+        await sendTransaction(terra, user, [
+            new MsgExecuteContract(user.key.accAddress, this.contractId, {
+                burn_leveraged_asset:{
+                share_of_pool:amountOfShares
+              }
+            }),
+          ]);
+    }
 
     async getHistoricalData(terra){
         const queryHistoricalData = await terra.wasm.contractQuery(this.contractId,{
@@ -134,7 +147,7 @@ export class LeveragedPool{
           })
 
           const myShare = this.dynamicPoolValues.totalLockedValue*myPoolShare.position.asset_pool_partial_share/myPoolShare.position.asset_pool_total_share;
-          var ust = (10e-6*myShare).toFixed(2)
+          var ust = (myShare).toFixed(2)
           
           if (isNaN(ust) ){
               ust = 0

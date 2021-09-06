@@ -6,14 +6,15 @@ import { LocalTerra, LCDClient, MsgExecuteContract } from '@terra-money/terra.js
 import LoadingMask from 'react-loadingmask';
 import "react-loadingmask/dist/react-loadingmask.css";
 import { localTerraObj, mk } from '../Helpers/QueryHelper';
-const LeverageCard = ( {props} ) => {
+const LeverageCard = ( {props, isLoading, setIsLoading} ) => {
 
     const [leverageMintAmount, setLeverageMintAmount] = useState(0)
-    
+    const [leverageBurnAMount, setLeverageBurnAmount] = useState(0)
+
     const terra = new LCDClient(localTerraObj);
     const myWallet = terra.wallet(mk)
 
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
     const [assetInPool, setAssetInPool] = useState(0)
     const [totalLP, setTotalLP] = useState(0)
     const [assetInPoolUST, setAssetInPoolUST] = useState("")
@@ -36,8 +37,12 @@ const LeverageCard = ( {props} ) => {
         return Math.min( (props.tlv - props.rbr*props.tmv)/(props.rbr*(1 - props.mintfee) - 1) )
     }
 
-    function handleRemoveChange(e){
+    function handleMintChange(e){
         setLeverageMintAmount(e.target.value)
+    }
+
+    function handleBurnChange(e){
+        setLeverageBurnAmount(e.target.value)
     }
 
     function handleMaxClick(){
@@ -47,6 +52,12 @@ const LeverageCard = ( {props} ) => {
     async function handleMintClickClick(){
         setIsLoading(true);
         await props.mintLeveragePosition(terra,myWallet, leverageMintAmount.toString());
+        setIsLoading(false);
+    }
+
+    async function handleCloseLeverage(){
+        setIsLoading(true);
+        await props.burnLeveragePosition(terra,myWallet, leverageBurnAMount.toString());
         setIsLoading(false);
     }
 
@@ -68,7 +79,7 @@ const LeverageCard = ( {props} ) => {
                             <Input type="number" 
                             name="first-name" 
                             placeholder="0"
-                            onChange={handleRemoveChange}></Input>
+                            onChange={handleMintChange}></Input>
                         </div>
                         <Button className="ui basic green button" onClick={handleMaxClick}>Max</Button>
                         <Button className="ui basic green button" onClick={handleMintClickClick}>Take Leverage</Button>
@@ -78,10 +89,14 @@ const LeverageCard = ( {props} ) => {
                     <Form className="ui form">
                         <Form.Field className="field">
                             <label>Convert {props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x to {props.assetInfo.symbol}</label>
-                            <Input type="number" name="first-name" placeholder="0"/>
+                            <Input type="number" 
+                            name="first-name" 
+                            placeholder="0"
+                            onChange={handleBurnChange}
+                            />
                         </Form.Field>
-                        <Button className="ui basic red button">Max</Button>
-                        <Button className="ui basic red button">Close Leverage</Button>
+                        <Button className="ui basic red button" >Max</Button>
+                        <Button className="ui basic red button" onClick={handleCloseLeverage}>Close Leverage</Button>
 
                     </Form>
                 </Container>   

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useLocation } from "react-router-dom";
 import LeverageChart from '../Components/LeverageChart';
 import {Container} from 'semantic-ui-react';
@@ -9,8 +9,12 @@ import { LCDClient } from '@terra-money/terra.js';
 
 
 const LeveragedPool = ({ props }) => { 
-    const location = useLocation();
+    const [isLoading, setIsLoading] = useState(false)
 
+    useEffect(()=>{
+    },[isLoading])
+
+    const location = useLocation();
     return (
        <Container id='Leveraged-Pool'>
            <Container id='Pool-Information'>
@@ -18,7 +22,7 @@ const LeveragedPool = ({ props }) => {
                 <LeverageSideCart id='Side-Cart' props={location.state}/>
            </Container>
            
-           <LeveragedActions props={location.state}/>      
+           <LeveragedActions props={location.state} isLoading={isLoading} setIsLoading={setIsLoading}/>      
        </Container>
     );
 }

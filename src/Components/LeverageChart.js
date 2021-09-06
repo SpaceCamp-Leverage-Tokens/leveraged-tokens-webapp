@@ -8,6 +8,11 @@ const LeverageChart = ({ props }) => {
   const [historicalData, setHistoricalData] = useState([])
   const [levHistoricalData, setLevHistoricalData] = useState([])
 
+  const [leveragePrice, setLeveragePrice] = useState(0)
+  const [assetPrice, setAssetPrice] = useState(0)
+  const [levOpeningPrice, setLevOpeningPrice]= useState(0)
+  const [assetOpeningPrice, setAssetOpeningPrice]= useState(0)
+
   useEffect( ()=> {
     getData();
   },[]);
@@ -30,11 +35,9 @@ const LeverageChart = ({ props }) => {
       y: parseFloat(priceContext.current_snapshot.asset_price)*10e-6,
     })
     setHistoricalData(myParsedData)
-
-    const levData = []
-
-    console.log(priceContext.opening_snapshot.leveraged_price > priceContext.current_snapshot.leveraged_price)
     
+
+    const levData = []    
 
     levData.push({
       x: new Date(priceContext.opening_snapshot.timestamp* 1000),
@@ -46,12 +49,23 @@ const LeverageChart = ({ props }) => {
       y: parseFloat(priceContext.current_snapshot.leveraged_price)*10e-6,
     })
     setLevHistoricalData(levData)
+
+    setAssetOpeningPrice(myParsedData[0].y.toFixed(2))
+    setAssetPrice(myParsedData[1].y.toFixed(2))
+
+    setLeveragePrice(levData[1].y.toFixed(2))
+    setLevOpeningPrice(levData[0].y.toFixed(2))
+
+
   }
 
   return (
       <Container className="ui card fluid">
           <div className="content">
-              <h2 className="ui header">{props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x Pool</h2>
+              <div>
+              <h2 className="ui header">{props.assetInfo.symbol}-{props.leveragedPoolInfo.leverage_amount}x ~ {leveragePrice} UST</h2>
+              {props.assetInfo.symbol} Current Price ~ {assetPrice} -- Opening Price: {assetOpeningPrice}
+              </div>
               <VictoryChart           
               scale={{x:"time"}}>
 

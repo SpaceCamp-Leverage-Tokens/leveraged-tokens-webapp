@@ -8,12 +8,12 @@ import LoadingMask from 'react-loadingmask';
 import "react-loadingmask/dist/react-loadingmask.css";
 import { localTerraObj, mk } from '../Helpers/QueryHelper';
 
-const LiquidityCard = ( { props } ) => {
-    
+const LiquidityCard = ( { props, isLoading, setIsLoading } ) => {
+
     const terra = new LCDClient(localTerraObj);
     const myWallet = terra.wallet(mk);
 
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
     const [assetInPool, setAssetInPool] = useState(0)
     const [totalLP, setTotalLP] = useState(0)
     const [assetInPoolUST, setAssetInPoolUST] = useState("")

@@ -5,7 +5,7 @@ import "./css/LeveragedActions.css"
 import { useHistory } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
 
-const LeveragedActions = ( {props} ) => {
+const LeveragedActions = ( {props, isLoading, setIsLoading} ) => {
     const history = useHistory();
 
     return (
@@ -21,9 +21,9 @@ const LeveragedActions = ( {props} ) => {
                 
             <div className="content">
                 <div>
-                    <LiquidityCard props={props}/>   
+                    <LiquidityCard props={props} isLoading={isLoading} setIsLoading={setIsLoading}/>   
                     <hr class="Card-Dividers"/>                     
-                    <LeverageCard props={props}/>
+                    <LeverageCard props={props} isLoading={isLoading} setIsLoading={setIsLoading}/>
                 </div>
             </div>
         </div>

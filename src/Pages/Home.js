@@ -56,7 +56,7 @@ const Home = ( ) => {
               <ResetReferenceCard className="Chart" Title={"Reset Leverage Price points"} Factory={factory}/>
             </Container>
             
-            <ActivePools props={props}/>
+            <ActivePools className="Active-Pools" props={props}/>
 
           </Container>
           

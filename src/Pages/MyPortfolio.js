@@ -10,10 +10,12 @@ const MyPortfolio = () => {
     const { status, network, wallets } = useWallet();
     const [contractInformation, setContractInformation] = useState(0)
     const terra = new LCDClient(localTerraObj);
+    const [isLoading, setIsLoading] = useState(false)
+
 
     useEffect(()=>{
         queryAllData();
-    },[])
+    },[isLoading])
 
     async function queryAllData(){
         const myPoolFactory = await new PoolFactory(terra);
@@ -28,7 +30,7 @@ const MyPortfolio = () => {
     }
 
     function getLeverageActionCards( pool ){
-        return <LeveragedActions props={pool}/>
+        return <LeveragedActions props={pool} isLoading={isLoading} setIsLoading={setIsLoading}/>
     }
 
     return (
