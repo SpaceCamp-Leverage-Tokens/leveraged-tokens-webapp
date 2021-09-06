@@ -22,7 +22,6 @@ const LeverageCard = ( {props} ) => {
     },[isLoading]);
 
     async function getMyBalance(){
-        console.log("Get my balance")
         const myTokenBalanceInPool = await props.getMyLevBalanceInPool(terra,myWallet.key.accAddress)
 
         setTotalLP(myTokenBalanceInPool.total)
@@ -39,12 +38,9 @@ const LeverageCard = ( {props} ) => {
 
     function handleMaxClick(){
         setLeverageMintAmount(getMaxMintable())
-        console.log("Max amount leverage")
-        console.log(leverageMintAmount)
     }
 
     async function handleMintClickClick(){
-        console.log(leverageMintAmount)
         setIsLoading(true);
         await props.mintLeveragePosition(terra,myWallet, leverageMintAmount.toString());
         setIsLoading(false);
@@ -68,7 +64,6 @@ const LeverageCard = ( {props} ) => {
                             <Input type="number" 
                             name="first-name" 
                             placeholder="0"
-                            value={leverageMintAmount}
                             onChange={handleRemoveChange}></Input>
                         </div>
                         <Button className="ui basic green button" onClick={handleMaxClick}>Max</Button>

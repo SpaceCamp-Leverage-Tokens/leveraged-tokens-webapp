@@ -1,6 +1,7 @@
 import { LCDClient, MsgExecuteContract } from "@terra-money/terra.js";
 import { sendTransaction, queryTokenBalance, toEncodedBinary } from "./helpers";
-export const factoryId = "terra1mwkg85mc3mv7lshgw4mn5dw3q6yku778glt46e";
+export const factoryId = "terra1yr676ux2hncy2ufc86z54kr9ltjt883whj30d8";
+export const mk = ""
 
 export class PoolFactory{
     constructor(terra){
@@ -62,6 +63,8 @@ export class LeveragedPool{
             this.price_context = poolData.price_context;
             this.leveragedPoolId = poolData.leveragedPoolId;
             this.leveragedPoolInfo = poolData.leveragedPoolInfo;
+            this.leveragedPoolInfo.leverage_amount =  (poolData.leveragedPoolInfo.leverage_amount*10e-6).toFixed(1);
+
             this.leveragedPoolState = poolData.leveragedPoolState;
             this.terraSwapPoolInfo = poolData.terraSwapPoolInfo;
             this.dynamicPoolValues = this.getDynamicValues()
@@ -207,13 +210,13 @@ export class LeveragedPool{
                 token_info:{}
                 });
                 
-                const poolData = { assetInfo: queryAssetInfoPromise,
-                    leveragedPoolId:contractId,
-                    leveragedPoolInfo: queryLeveragedPoolInfoPromise.hyperparameters,
-                    leveragedPoolState: queryLeveragedPoolInfoPromise.pool_state,
-                    terraSwapPoolInfo: queryCurrentPricePromise,
-                    price_context: queryLeveragedPoolInfoPromise.price_context,
-                }
+            const poolData = { assetInfo: queryAssetInfoPromise,
+                leveragedPoolId:contractId,
+                leveragedPoolInfo: queryLeveragedPoolInfoPromise.hyperparameters,
+                leveragedPoolState: queryLeveragedPoolInfoPromise.pool_state,
+                terraSwapPoolInfo: queryCurrentPricePromise,
+                price_context: queryLeveragedPoolInfoPromise.price_context,
+            }
             
 
         return poolData

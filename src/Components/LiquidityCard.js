@@ -92,7 +92,6 @@ const LiquidityCard = ( { props } ) => {
                             <Input type="number" 
                             name="first-name"
                             placeholder="0" 
-                            value={addAmount}
                             onChange={handleAddAmountChange}
                             />
                         </div>
@@ -107,7 +106,6 @@ const LiquidityCard = ( { props } ) => {
                             <Input type="number" 
                             name="first-name" 
                             placeholder="0"
-                            value={removeAmount}
                             onChange={handleRemoveChange}/>
                         </div>
                         <Button className="ui basic red button" onClick={handleMaxClick}>Max</Button>
