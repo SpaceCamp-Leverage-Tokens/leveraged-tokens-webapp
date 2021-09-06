@@ -1,7 +1,7 @@
 import { LCDClient, MsgExecuteContract,MnemonicKey } from "@terra-money/terra.js";
 import { sendTransaction, queryTokenBalance, toEncodedBinary } from "./helpers";
 
-export const factoryId = "terra16rwaapxm53ylv332z8wzc8fmz568wyxywtpdvw";
+export const factoryId = "terra1zfxhx3t5mm8u6wv66swlxvq6kgdfqnf62a5650";
 // export const mk = new MnemonicKey({mnemonic:"symbol force gallery make bulk round subway violin worry mixture penalty kingdom boring survey tool fringe patrol sausage hard admit remember broken alien absorb"})
 export const mk = new MnemonicKey({mnemonic:"arena wisdom monkey aspect blanket peanut hurt because youth trophy vault lesson rookie trial loan below adult gate cactus fetch spoon ignore satisfy ride"})
 // export const localTerraObj = {
