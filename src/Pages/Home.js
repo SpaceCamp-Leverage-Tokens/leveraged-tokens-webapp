@@ -6,7 +6,7 @@ import ActivePools from '../Components/ActivePools';
 import { LCDClient } from '@terra-money/terra.js';
 import { PoolFactory } from '../Helpers/QueryHelper';
 import ResetReferenceCard from '../Components/ResetReferenceCard';
-
+import { localTerraObj } from '../Helpers/QueryHelper';
 const Home = ( ) => {
   const DummyTlv=[
     { x: 1, y: 2 },
@@ -36,24 +36,13 @@ const Home = ( ) => {
     getFactory();
   },[]);
 
-  const terra = new LCDClient({
-    URL: 'http://localhost:1317',
-    chainID: 'localterra'
-  });
-
-  // const terra = new LCDClient({
-  //   URL: 'https://tequila-lcd.terra.dev',
-  //   chainID: 'tequila-0004',
-  // });
+  const terra = new LCDClient(localTerraObj);
 
   async function getFactory(){        
     const myPoolFactory = await new PoolFactory(terra);
     console.log(myPoolFactory)
     setFactory(myPoolFactory)
   }
-      
-
-    
 
   const props = {contractIds: factory.poolIds, terra:terra}
 

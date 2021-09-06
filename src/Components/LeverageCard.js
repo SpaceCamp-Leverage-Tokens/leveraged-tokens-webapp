@@ -5,12 +5,14 @@ import { Button, Form, Input } from 'semantic-ui-react'
 import { LocalTerra, LCDClient, MsgExecuteContract } from '@terra-money/terra.js';
 import LoadingMask from 'react-loadingmask';
 import "react-loadingmask/dist/react-loadingmask.css";
-
+import { localTerraObj, mk } from '../Helpers/QueryHelper';
 const LeverageCard = ( {props} ) => {
-    const [leverageMintAmount, setLeverageMintAmount] = useState(0)
 
-    const terra = new LocalTerra;
-    const myWallet = terra.wallets.test3;
+    const [leverageMintAmount, setLeverageMintAmount] = useState(0)
+    
+    const terra = new LCDClient(localTerraObj);
+    const myWallet = terra.wallet(mk)
+
     const [isLoading, setIsLoading] = useState(false)
     const [assetInPool, setAssetInPool] = useState(0)
     const [totalLP, setTotalLP] = useState(0)
@@ -22,8 +24,10 @@ const LeverageCard = ( {props} ) => {
     },[isLoading]);
 
     async function getMyBalance(){
+        console.log(myWallet)
+        console.log(myWallet.key.accAddress)
         const myTokenBalanceInPool = await props.getMyLevBalanceInPool(terra,myWallet.key.accAddress)
-
+        console.log(myTokenBalanceInPool)
         setTotalLP(myTokenBalanceInPool.total)
         setAssetInPool(myTokenBalanceInPool.raw)
         setAssetInPoolUST(myTokenBalanceInPool.ust)

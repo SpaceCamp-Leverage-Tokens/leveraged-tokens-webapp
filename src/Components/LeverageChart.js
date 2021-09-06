@@ -4,11 +4,6 @@ import { Container } from '@material-ui/core';
 import { LCDClient } from '@terra-money/terra.js';
 
 const LeverageChart = ({ props }) => {
-
-  const terra = new LCDClient({
-      URL: 'http://localhost:1317',
-      chainID: 'localterra'
-  });
   
   const [historicalData, setHistoricalData] = useState([])
   const [levHistoricalData, setLevHistoricalData] = useState([])

@@ -6,11 +6,12 @@ import { queryTokenBalance } from '../Helpers/helpers';
 import { LocalTerra, LCDClient, MsgExecuteContract } from '@terra-money/terra.js';
 import LoadingMask from 'react-loadingmask';
 import "react-loadingmask/dist/react-loadingmask.css";
+import { localTerraObj, mk } from '../Helpers/QueryHelper';
 
 const LiquidityCard = ( { props } ) => {
     
-    const terra = new LocalTerra;
-    const myWallet = terra.wallets.test3;
+    const terra = new LCDClient(localTerraObj);
+    const myWallet = terra.wallet(mk);
 
     const [isLoading, setIsLoading] = useState(false)
     const [assetInPool, setAssetInPool] = useState(0)

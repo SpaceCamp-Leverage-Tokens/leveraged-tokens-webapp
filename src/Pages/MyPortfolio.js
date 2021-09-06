@@ -5,16 +5,11 @@ import TotalValueCard from '../Components/TotalValueCard';
 import { LCDClient } from '@terra-money/terra.js';
 import {  LeveragedPool, PoolFactory } from '../Helpers/QueryHelper';
 import { useWallet } from '@terra-money/wallet-provider';
-
+import { localTerraObj, mk } from '../Helpers/QueryHelper';
 const MyPortfolio = () => {
     const { status, network, wallets } = useWallet();
-
     const [contractInformation, setContractInformation] = useState(0)
-
-    const terra = new LCDClient({
-        URL: 'http://localhost:1317',
-        chainID: 'localterra'
-    });
+    const terra = new LCDClient(localTerraObj);
 
     useEffect(()=>{
         queryAllData();

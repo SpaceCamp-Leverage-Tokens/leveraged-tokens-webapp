@@ -1,7 +1,13 @@
-import { LCDClient, MsgExecuteContract } from "@terra-money/terra.js";
+import { LCDClient, MsgExecuteContract,MnemonicKey } from "@terra-money/terra.js";
 import { sendTransaction, queryTokenBalance, toEncodedBinary } from "./helpers";
+
 export const factoryId = "terra1yr676ux2hncy2ufc86z54kr9ltjt883whj30d8";
-export const mk = ""
+export const mk = new MnemonicKey({mnemonic:"symbol force gallery make bulk round subway violin worry mixture penalty kingdom boring survey tool fringe patrol sausage hard admit remember broken alien absorb"})
+
+export const localTerraObj = {
+    URL: 'http://localhost:1317',
+    chainID: 'localterra'
+}
 
 export class PoolFactory{
     constructor(terra){

@@ -6,12 +6,13 @@ import { Button } from 'semantic-ui-react'
 import { LocalTerra, LCDClient, MsgExecuteContract } from '@terra-money/terra.js';
 import { tsMappedType } from '@babel/types';
 import { useWallet } from '@terra-money/wallet-provider';
-
+import { localTerraObj, mk } from '../Helpers/QueryHelper';
 const TotalValueCard = ({props}) => {
     const { status, network, wallets } = useWallet();
+    
+    const terra = new LCDClient(localTerraObj);
+    const myWallet = terra.wallet(mk);
 
-    const terra = new LocalTerra;
-    const myWallet = terra.wallets.test3;
     const [position,setPositions] = useState([]);
     const [totalVal,setTotalVal] = useState([]);
     const [circleData,setCircleData] = useState([]);

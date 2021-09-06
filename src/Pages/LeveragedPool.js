@@ -7,20 +7,9 @@ import './css/LeveragedPool.css'
 import LeveragedActions from '../Components/LeveragedActions';
 import { LCDClient } from '@terra-money/terra.js';
 
+
 const LeveragedPool = ({ props }) => { 
     const location = useLocation();
-    
-    //  const terra = new LCDClient({
-    //     URL: 'https://tequila-lcd.terra.dev',
-    //     chainID: 'tequila-0004',
-    //   });
-    
-    //   To use LocalTerra
-
-    const terra = new LCDClient({
-    URL: 'http://localhost:1317',
-    chainID: 'localterra'
-    });
 
     return (
        <Container id='Leveraged-Pool'>
