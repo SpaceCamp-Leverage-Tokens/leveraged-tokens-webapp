@@ -42,8 +42,8 @@ const ResetReferenceCard = ({Title, Factory}) => {
     const secondsInADay = 60*60*24;
     
     async function handleOnClick() {
-        console.log(Factory)
-        await Factory.resetLeveragePriceReference(terra, terra.wallets.test1)
+        // console.log(Factory)
+        // await Factory.resetLeveragePriceReference(terra, terra.wallets.test1)
     }
 
     const children = ({ remainingTime }) => {
