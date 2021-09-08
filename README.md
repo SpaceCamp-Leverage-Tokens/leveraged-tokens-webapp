@@ -1,75 +1,38 @@
-# Getting Started with Create React App
+Leveraged Tokens on Terra Network (Webapp)
+==========================================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Webapp and main user-interface for participating in the trading of leveraged
+tokens on Terra.
 
-## Install Dependencies 
+Contract Addresses
+------------------
 
-### `yarn install`
+All contracts are deployed on the Bombay-10 network.
 
-## Available Scripts
+| Contract Name                                      | Address                                  |
+| -------------------------------------------------- | -------------------------------------------- |
+| Factory                                            | [terra16sjkmp79wku8hg3su7uqxqgm9770r0ddz8kdq8](https://finder.terra.money/bombay-10/address/terra16sjkmp79wku8hg3su7uqxqgm9770r0ddz8kdq8)|
+| mTSLA 2x leverage pool                             | [terra14kqxdu9rv97dhrwq3ns444rnwhzz0s72k0nt7d](https://finder.terra.money/bombay-10/address/terra14kqxdu9rv97dhrwq3ns444rnwhzz0s72k0nt7d)|
+| MIR 3x leverage pool                               | [terra1kn9e6pmcqsynkmu4vra4wmxv0f4f5m356ul6re](https://finder.terra.money/bombay-10/address/terra1kn9e6pmcqsynkmu4vra4wmxv0f4f5m356ul6re)|
 
-In the project directory, you can run:
+Minting a leveraged position requires access to the mocked
+[MIR](https://finder.terra.money/bombay-10/address/terra1k59qq3pxj93arv399l4a90ndewn50gfy8nkcn2)
+or
+[mTSLA](https://finder.terra.money/bombay-10/address/terra1dsh6lll9av4dqk57juavk6dg4yzh9twhe600z6)
+assets which back the leveraged positions.
 
+Getting and Running the Webapp
+------------------------------
 
-### `yarn start`
+Use these steps to clone from our repository and to run the webapp locally.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+git clone https://github.com/SpaceCamp-Leverage-Tokens/leveraged-tokens-webapp
+cd leveraged-tokens-webapp
+yarn install
+yarn start
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+NOTE: The first run of `yarn start` invokes `yarn build` to actually build the
+webapp. Subsequent runs of `yarn start` once built are much faster because the
+build artifacts are cached.
